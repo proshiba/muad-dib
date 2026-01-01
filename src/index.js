@@ -1,6 +1,7 @@
 const { scanPackageJson } = require('./scanner/package.js');
 const { scanShellScripts } = require('./scanner/shell.js');
 const { analyzeAST } = require('./scanner/ast.js');
+const { detectObfuscation } = require('./scanner/obfuscation.js');
 const { getPlaybook } = require('./response/playbooks.js');
 
 async function run(targetPath) {
@@ -19,6 +20,10 @@ async function run(targetPath) {
   // Analyse AST des fichiers JS
   const astThreats = await analyzeAST(targetPath);
   threats.push(...astThreats);
+
+  // Detection d'obfuscation
+  const obfuscationThreats = detectObfuscation(targetPath);
+  threats.push(...obfuscationThreats);
 
   // Resultats
   if (threats.length === 0) {

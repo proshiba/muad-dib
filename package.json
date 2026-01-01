@@ -9,10 +9,20 @@
   "scripts": {
     "test": "node test/test.js"
   },
-  "keywords": ["security", "npm", "supply-chain", "malware", "scanner"],
+  "keywords": [
+    "security",
+    "npm",
+    "supply-chain",
+    "malware",
+    "scanner"
+  ],
   "author": "",
   "license": "MIT",
   "engines": {
     "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "acorn-walk": "^8.3.4"
   }
 }
