@@ -8,9 +8,6 @@ function detectObfuscation(targetPath) {
   for (const file of files) {
     const content = fs.readFileSync(file, 'utf8');
     const relativePath = path.relative(targetPath, file);
-    
-    // Ignore nos propres fichiers
-    if (relativePath.startsWith('src')) continue;
 
     const signals = [];
     let score = 0;
@@ -69,6 +66,13 @@ function detectObfuscation(targetPath) {
   return threats;
 }
 
+const EXCLUDED_DIRS = [
+  'test',
+  'node_modules',
+  '.git',
+  'src'
+];
+
 function findJsFiles(dir) {
   const results = [];
   
@@ -77,7 +81,7 @@ function findJsFiles(dir) {
   const items = fs.readdirSync(dir);
   
   for (const item of items) {
-    if (item === 'node_modules' || item === '.git') continue;
+    if (EXCLUDED_DIRS.includes(item)) continue;
     
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
