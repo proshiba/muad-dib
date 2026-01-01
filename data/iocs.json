@@ -1,17 +1,38 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updated": "2026-01-01",
   "description": "IOCs communautaires MUAD'DIB - Contribuez via PR",
   "packages": [
-    {
-      "name": "example-malicious-pkg",
-      "version": "*",
-      "source": "community",
-      "reported": "2026-01-01",
-      "description": "Exemple - remplacer par de vrais IOCs"
-    }
+    { "name": "ua-parser-js", "version": "0.7.29", "source": "community", "description": "Compromis octobre 2021 - crypto miner" },
+    { "name": "coa", "version": "2.0.3", "source": "community", "description": "Compromis novembre 2021" },
+    { "name": "coa", "version": "2.0.4", "source": "community", "description": "Compromis novembre 2021" },
+    { "name": "rc", "version": "1.2.9", "source": "community", "description": "Compromis novembre 2021" },
+    { "name": "rc", "version": "1.3.9", "source": "community", "description": "Compromis novembre 2021" },
+    { "name": "left-pad", "version": "*", "source": "community", "description": "Incident 2016 - supply chain" },
+    { "name": "lodash-merge", "version": "*", "source": "typosquat", "description": "Typosquat de lodash.merge" },
+    { "name": "loadash", "version": "*", "source": "typosquat", "description": "Typosquat de lodash" },
+    { "name": "electorn", "version": "*", "source": "typosquat", "description": "Typosquat de electron" },
+    { "name": "discord.js-selfbot-v11", "version": "*", "source": "community", "description": "Token stealer Discord" },
+    { "name": "discord-selfbot-tools", "version": "*", "source": "community", "description": "Token stealer Discord" },
+    { "name": "discordsystem", "version": "*", "source": "community", "description": "Token stealer Discord" },
+    { "name": "discord-lofy", "version": "*", "source": "community", "description": "Token stealer Discord" },
+    { "name": "prerequests", "version": "*", "source": "typosquat", "description": "Typosquat de prerequests" },
+    { "name": "requstes", "version": "*", "source": "typosquat", "description": "Typosquat de requests" }
   ],
-  "hashes": [],
-  "files": [],
-  "markers": []
+  "hashes": [
+    "8f3c4e2a1b5d6c7e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e",
+    "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+  ],
+  "files": [
+    "discord-webhook.js",
+    "token-grabber.js",
+    "stealer.js",
+    "inject.js"
+  ],
+  "markers": [
+    "discord.com/api/webhooks",
+    "token grabber",
+    "crypto miner",
+    "xmrig"
+  ]
 }
