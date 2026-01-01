@@ -6,6 +6,7 @@ const { scanDependencies } = require('./scanner/dependencies.js');
 const { getPlaybook } = require('./response/playbooks.js');
 const { saveReport } = require('./report.js');
 const { scanHashes } = require('./scanner/hash.js');
+const { analyzeDataFlow } = require('./scanner/dataflow.js');
 
 async function run(targetPath, options = {}) {
   const threats = [];
@@ -29,10 +30,14 @@ async function run(targetPath, options = {}) {
   // Scan des dependances node_modules
   const dependencyThreats = await scanDependencies(targetPath);
   threats.push(...dependencyThreats);
-  
+
   // Scan des hashes malveillants
   const hashThreats = await scanHashes(targetPath);
   threats.push(...hashThreats);
+
+  // Analyse des flux de donnees
+  const dataflowThreats = await analyzeDataFlow(targetPath);
+  threats.push(...dataflowThreats);
 
   // Construire le resultat
   const result = {
