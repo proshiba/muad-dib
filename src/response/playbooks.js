@@ -100,6 +100,9 @@ const PLAYBOOKS = {
 
   shai_hulud_marker:
     'CRITIQUE: Marqueur Shai-Hulud detecte. Package compromis. Supprimer immediatement et regenerer tous les tokens.',
+
+  known_malicious_hash:
+    'CRITIQUE: Fichier malveillant confirme par hash. Supprimer immediatement. Considerer la machine compromise.',
 };
 
 function getPlaybook(threatType) {
