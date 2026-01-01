@@ -71,7 +71,7 @@ const PLAYBOOKS = {
   wget_chmod_exec:
     'Telechargement et execution de binaire. Ne pas executer. Analyser le fichier.',
 
-    known_malicious_package:
+  known_malicious_package:
     'CRITIQUE: Supprimer immediatement. rm -rf node_modules && npm cache clean --force && npm install',
 
   lifecycle_script_dependency:
@@ -90,7 +90,13 @@ const PLAYBOOKS = {
     'Execution de commande systeme. Verifier les arguments passes.',
 
   dangerous_call_spawn:
-    'Spawn de processus detecte. Verifier la commande executee.'
+    'Spawn de processus detecte. Verifier la commande executee.',
+
+  sensitive_string:
+    'Reference a un chemin ou identifiant sensible. Verifier le contexte d\'utilisation.',
+
+  env_access:
+    'Acces a une variable d\'environnement sensible. Verifier si les donnees sont exfiltrees.',
 };
 
 function getPlaybook(threatType) {
