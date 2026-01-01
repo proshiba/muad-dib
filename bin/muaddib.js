@@ -10,10 +10,14 @@ const options = args.slice(1);
 
 let target = '.';
 let jsonOutput = false;
+let htmlOutput = null;
 
 for (let i = 0; i < options.length; i++) {
   if (options[i] === '--json') {
     jsonOutput = true;
+  } else if (options[i] === '--html') {
+    htmlOutput = options[i + 1] || 'muaddib-report.html';
+    i++;
   } else if (!options[i].startsWith('-')) {
     target = options[i];
   }
@@ -24,19 +28,20 @@ if (!command) {
   MUAD'DIB - Chasseur de vers npm
   
   Usage:
-    muaddib scan [path] [--json]    Analyse un projet
+    muaddib scan [path] [options]   Analyse un projet
     muaddib watch [path]            Surveille un projet en temps reel
     muaddib update                  Met a jour les IOCs
     muaddib help                    Affiche l'aide
   
   Options:
-    --json    Sortie au format JSON
+    --json           Sortie au format JSON
+    --html [file]    Genere un rapport HTML
   `);
   process.exit(0);
 }
 
 if (command === 'scan') {
-  run(target, { json: jsonOutput }).then(exitCode => {
+  run(target, { json: jsonOutput, html: htmlOutput }).then(exitCode => {
     process.exit(exitCode);
   });
 } else if (command === 'watch') {
@@ -49,7 +54,7 @@ if (command === 'scan') {
     process.exit(1);
   });
 } else if (command === 'help') {
-  console.log('muaddib scan [path] [--json] - Analyse un projet npm');
+  console.log('muaddib scan [path] [--json] [--html file] - Analyse un projet npm');
   console.log('muaddib watch [path] - Surveille un projet en temps reel');
   console.log('muaddib update - Met a jour les IOCs');
 } else {
