@@ -103,6 +103,9 @@ const PLAYBOOKS = {
 
   known_malicious_hash:
     'CRITIQUE: Fichier malveillant confirme par hash. Supprimer immediatement. Considerer la machine compromise.',
+
+  suspicious_dataflow:
+    'CRITIQUE: Code lit des credentials et les envoie sur le reseau. Exfiltration probable. Isoler la machine, regenerer tous les secrets.',
 };
 
 function getPlaybook(threatType) {
