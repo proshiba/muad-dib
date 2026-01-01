@@ -61,4 +61,5 @@ function loadCachedIOCs() {
   return { packages: [], files: [], hashes: [], markers: [], updated: null };
 }
 
-module.exports = { updateIOCs, loadCachedIOCs };
+
+module.exports = { updateIOCs, loadCachedIOCs }; 
