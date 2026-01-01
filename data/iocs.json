@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-01-01",
+  "description": "IOCs communautaires MUAD'DIB - Contribuez via PR",
+  "packages": [
+    {
+      "name": "example-malicious-pkg",
+      "version": "*",
+      "source": "community",
+      "reported": "2026-01-01",
+      "description": "Exemple - remplacer par de vrais IOCs"
+    }
+  ],
+  "hashes": [],
+  "files": [],
+  "markers": []
+}
