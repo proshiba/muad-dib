@@ -4,6 +4,7 @@ const https = require('https');
 
 const CACHE_PATH = path.join(__dirname, '../../.muaddib-cache');
 const IOC_FILE = path.join(CACHE_PATH, 'iocs.json');
+const { loadYAMLIOCs, getIOCStats } = require('./yaml-loader.js');
 
 const BUILTIN_IOCS = {
   packages: [
@@ -195,10 +196,49 @@ function parseMuaddibFeed(data) {
 }
 
 function loadCachedIOCs() {
+  // Priorite 1 : IOCs YAML locaux
+  const yamlIOCs = loadYAMLIOCs();
+  
+  // Priorite 2 : Cache telecharge
+  let cachedIOCs = { packages: [], hashes: [], markers: [], files: [] };
   if (fs.existsSync(IOC_FILE)) {
-    return JSON.parse(fs.readFileSync(IOC_FILE, 'utf8'));
+    cachedIOCs = JSON.parse(fs.readFileSync(IOC_FILE, 'utf8'));
   }
-  return BUILTIN_IOCS;
+  
+  // Merge : YAML + Cache + Builtin
+  const merged = {
+    packages: [...yamlIOCs.packages],
+    hashes: yamlIOCs.hashes.map(h => h.sha256),
+    markers: yamlIOCs.markers.map(m => m.pattern),
+    files: yamlIOCs.files.map(f => f.name)
+  };
+  
+  // Ajouter les IOCs du cache sans doublons
+  for (const pkg of cachedIOCs.packages || []) {
+    if (!merged.packages.find(p => p.name === pkg.name)) {
+      merged.packages.push(pkg);
+    }
+  }
+  
+  for (const hash of cachedIOCs.hashes || []) {
+    if (!merged.hashes.includes(hash)) {
+      merged.hashes.push(hash);
+    }
+  }
+  
+  for (const marker of cachedIOCs.markers || []) {
+    if (!merged.markers.includes(marker)) {
+      merged.markers.push(marker);
+    }
+  }
+  
+  for (const file of cachedIOCs.files || []) {
+    if (!merged.files.includes(file)) {
+      merged.files.push(file);
+    }
+  }
+  
+  return merged;
 }
 
 module.exports = { updateIOCs, loadCachedIOCs };
