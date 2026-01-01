@@ -8,6 +8,7 @@ const { analyzeDataFlow } = require('./scanner/dataflow.js');
 const { getPlaybook } = require('./response/playbooks.js');
 const { getRule } = require('./rules/index.js');
 const { saveReport } = require('./report.js');
+const { saveSARIF } = require('./sarif.js');
 
 async function run(targetPath, options = {}) {
   const threats = [];
@@ -67,6 +68,11 @@ async function run(targetPath, options = {}) {
   else if (options.html) {
     saveReport(result, options.html);
     console.log(`[OK] Rapport HTML genere: ${options.html}`);
+  }
+  // Sortie SARIF
+  else if (options.sarif) {
+    saveSARIF(result, options.sarif);
+    console.log(`[OK] Rapport SARIF genere: ${options.sarif}`);
   }
   // Sortie explain
   else if (options.explain) {
