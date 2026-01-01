@@ -13,6 +13,7 @@ let jsonOutput = false;
 let htmlOutput = null;
 let sarifOutput = null;
 let explainMode = false;
+let failLevel = 'high'; // Par defaut, fail sur HIGH et CRITICAL
 
 for (let i = 0; i < options.length; i++) {
   if (options[i] === '--json') {
@@ -25,6 +26,9 @@ for (let i = 0; i < options.length; i++) {
     i++;
   } else if (options[i] === '--explain') {
     explainMode = true;
+  } else if (options[i] === '--fail-on') {
+    failLevel = options[i + 1] || 'high';
+    i++;
   } else if (!options[i].startsWith('-')) {
     target = options[i];
   }
@@ -41,10 +45,12 @@ if (!command) {
     muaddib help                    Affiche l'aide
   
   Options:
-    --json           Sortie au format JSON
-    --html [file]    Genere un rapport HTML
-    --sarif [file]   Genere un rapport SARIF (GitHub Security)
-    --explain        Affiche les details de chaque detection
+    --json              Sortie au format JSON
+    --html [file]       Genere un rapport HTML
+    --sarif [file]      Genere un rapport SARIF (GitHub Security)
+    --explain           Affiche les details de chaque detection
+    --fail-on [level]   Niveau de severite pour exit code (critical|high|medium|low)
+                        Defaut: high (fail sur HIGH et CRITICAL)
   `);
   process.exit(0);
 }
@@ -54,7 +60,8 @@ if (command === 'scan') {
     json: jsonOutput, 
     html: htmlOutput, 
     sarif: sarifOutput,
-    explain: explainMode 
+    explain: explainMode,
+    failLevel: failLevel
   }).then(exitCode => {
     process.exit(exitCode);
   });
@@ -68,7 +75,7 @@ if (command === 'scan') {
     process.exit(1);
   });
 } else if (command === 'help') {
-  console.log('muaddib scan [path] [--json] [--html file] [--sarif file] [--explain]');
+  console.log('muaddib scan [path] [--json] [--html file] [--sarif file] [--explain] [--fail-on level]');
   console.log('muaddib watch [path] - Surveille un projet en temps reel');
   console.log('muaddib update - Met a jour les IOCs');
 } else {
