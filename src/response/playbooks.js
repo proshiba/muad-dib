@@ -69,7 +69,28 @@ const PLAYBOOKS = {
     'Execution de wget via child_process. Verifier l\'URL et les donnees.',
   
   wget_chmod_exec:
-    'Telechargement et execution de binaire. Ne pas executer. Analyser le fichier.'
+    'Telechargement et execution de binaire. Ne pas executer. Analyser le fichier.',
+
+    known_malicious_package:
+    'CRITIQUE: Supprimer immediatement. rm -rf node_modules && npm cache clean --force && npm install',
+
+  lifecycle_script_dependency:
+    'Verifier le contenu du script dans le package. Reinstaller avec --ignore-scripts si suspect.',
+
+  suspicious_file:
+    'Fichier typique de Shai-Hulud. Ne pas executer. Verifier le hash contre les IOCs connus.',
+
+  obfuscation_detected:
+    'Code volontairement obscurci. Analyser dans un environnement isole. Probable malware.',
+
+  dangerous_call_eval:
+    'Appel eval() detecte. Verifier la source des donnees. Risque d\'execution de code arbitraire.',
+
+  dangerous_call_exec:
+    'Execution de commande systeme. Verifier les arguments passes.',
+
+  dangerous_call_spawn:
+    'Spawn de processus detecte. Verifier la commande executee.'
 };
 
 function getPlaybook(threatType) {
