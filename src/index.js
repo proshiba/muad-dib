@@ -4,6 +4,7 @@ const { analyzeAST } = require('./scanner/ast.js');
 const { detectObfuscation } = require('./scanner/obfuscation.js');
 const { scanDependencies } = require('./scanner/dependencies.js');
 const { getPlaybook } = require('./response/playbooks.js');
+const { saveReport } = require('./report.js');
 
 async function run(targetPath, options = {}) {
   const threats = [];
@@ -28,25 +29,33 @@ async function run(targetPath, options = {}) {
   const dependencyThreats = await scanDependencies(targetPath);
   threats.push(...dependencyThreats);
 
+  // Construire le resultat
+  const result = {
+    target: targetPath,
+    timestamp: new Date().toISOString(),
+    threats: threats.map(t => ({
+      ...t,
+      playbook: getPlaybook(t.type)
+    })),
+    summary: {
+      total: threats.length,
+      critical: threats.filter(t => t.severity === 'CRITICAL').length,
+      high: threats.filter(t => t.severity === 'HIGH').length,
+      medium: threats.filter(t => t.severity === 'MEDIUM').length
+    }
+  };
+
   // Sortie JSON
   if (options.json) {
-    const result = {
-      target: targetPath,
-      timestamp: new Date().toISOString(),
-      threats: threats.map(t => ({
-        ...t,
-        playbook: getPlaybook(t.type)
-      })),
-      summary: {
-        total: threats.length,
-        critical: threats.filter(t => t.severity === 'CRITICAL').length,
-        high: threats.filter(t => t.severity === 'HIGH').length,
-        medium: threats.filter(t => t.severity === 'MEDIUM').length
-      }
-    };
     console.log(JSON.stringify(result, null, 2));
-  } else {
-    // Sortie normale
+  } 
+  // Sortie HTML
+  else if (options.html) {
+    saveReport(result, options.html);
+    console.log(`[OK] Rapport HTML genere: ${options.html}`);
+  } 
+  // Sortie normale
+  else {
     console.log(`\n[MUADDIB] Scan de ${targetPath}\n`);
 
     if (threats.length === 0) {
