@@ -9,6 +9,9 @@ on:
 jobs:
   scan:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,4 +25,9 @@ jobs:
         run: npm install
 
       - name: Run MUADDIB scan
-        run: node bin/muaddib.js scan . || true
+        run: node bin/muaddib.js scan . --sarif results.sarif || true
+
+      - name: Upload SARIF to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
