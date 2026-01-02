@@ -1,29 +1,43 @@
 {
-  "name": "muaddib",
-  "version": "0.1.0",
-  "description": "Détection et réponse aux attaques supply chain npm",
+  "name": "muaddib-scanner",
+  "version": "1.0.0",
+  "description": "Supply-chain threat detection & response for npm",
   "main": "src/index.js",
   "bin": {
     "muaddib": "./bin/muaddib.js"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node tests/run-tests.js",
+    "scan": "node bin/muaddib.js scan .",
+    "update": "node bin/muaddib.js update"
   },
   "keywords": [
     "security",
     "npm",
     "supply-chain",
     "malware",
-    "scanner"
+    "scanner",
+    "shai-hulud",
+    "detection",
+    "ast",
+    "sarif"
   ],
-  "author": "",
+  "author": "DNSZLSK",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DNSZLSK/muad-dib.git"
+  },
+  "homepage": "https://github.com/DNSZLSK/muad-dib",
+  "bugs": {
+    "url": "https://github.com/DNSZLSK/muad-dib/issues"
+  },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "acorn": "^8.15.0",
+    "acorn": "^8.14.0",
     "acorn-walk": "^8.3.4",
-    "js-yaml": "^4.1.1"
+    "js-yaml": "^4.1.0"
   }
 }
