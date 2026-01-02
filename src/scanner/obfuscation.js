@@ -66,12 +66,7 @@ function detectObfuscation(targetPath) {
   return threats;
 }
 
-const EXCLUDED_DIRS = [
-  'test',
-  'node_modules',
-  '.git',
-  'src'
-];
+const EXCLUDED_DIRS = ['test', 'tests', 'node_modules', '.git', 'src'];
 
 function findJsFiles(dir) {
   const results = [];

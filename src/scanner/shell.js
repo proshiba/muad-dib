@@ -45,7 +45,7 @@ function findFiles(dir, extension) {
   const items = fs.readdirSync(dir);
   
   for (const item of items) {
-    if (item === 'node_modules' || item === '.git') continue;
+    if (item === 'node_modules' || item === '.git' || item === 'test' || item === 'tests' || item === 'src') continue;
     
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);

@@ -11,7 +11,7 @@ const EXCLUDED_FILES = [
   'src/response/playbooks.js'
 ];
 
-const EXCLUDED_DIRS = ['test', 'node_modules', '.git', 'src'];
+const EXCLUDED_DIRS = ['test', 'tests', 'node_modules', '.git', 'src'];
 
 const DANGEROUS_CALLS = [
   'eval',
