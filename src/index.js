@@ -53,15 +53,34 @@ async function run(targetPath, options = {}) {
     };
   });
 
+// Calculer le score de risque (0-100)
+  const criticalCount = threats.filter(t => t.severity === 'CRITICAL').length;
+  const highCount = threats.filter(t => t.severity === 'HIGH').length;
+  const mediumCount = threats.filter(t => t.severity === 'MEDIUM').length;
+  
+  let riskScore = 0;
+  riskScore += criticalCount * 25;  // CRITICAL = 25 points
+  riskScore += highCount * 10;       // HIGH = 10 points
+  riskScore += mediumCount * 3;      // MEDIUM = 3 points
+  riskScore = Math.min(100, riskScore); // Cap a 100
+
+  const riskLevel = riskScore >= 75 ? 'CRITICAL' 
+                  : riskScore >= 50 ? 'HIGH'
+                  : riskScore >= 25 ? 'MEDIUM'
+                  : riskScore > 0 ? 'LOW'
+                  : 'SAFE';
+
   const result = {
     target: targetPath,
     timestamp: new Date().toISOString(),
     threats: enrichedThreats,
     summary: {
       total: threats.length,
-      critical: threats.filter(t => t.severity === 'CRITICAL').length,
-      high: threats.filter(t => t.severity === 'HIGH').length,
-      medium: threats.filter(t => t.severity === 'MEDIUM').length
+      critical: criticalCount,
+      high: highCount,
+      medium: mediumCount,
+      riskScore: riskScore,
+      riskLevel: riskLevel
     }
   };
 
@@ -105,9 +124,13 @@ async function run(targetPath, options = {}) {
       });
     }
   }
-  // Sortie normale
+// Sortie normale
   else {
     console.log(`\n[MUADDIB] Scan de ${targetPath}\n`);
+
+    // Afficher le score de risque
+    const scoreBar = '█'.repeat(Math.floor(result.summary.riskScore / 5)) + '░'.repeat(20 - Math.floor(result.summary.riskScore / 5));
+    console.log(`[SCORE] ${result.summary.riskScore}/100 [${scoreBar}] ${result.summary.riskLevel}\n`);
 
     if (threats.length === 0) {
       console.log('[OK] Aucune menace detectee.\n');
