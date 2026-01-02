@@ -1,0 +1,8 @@
+tests/
+test/
+vscode-extension/
+docs/
+.github/
+.git/
+*.md
+!README.md

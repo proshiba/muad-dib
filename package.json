@@ -4,7 +4,7 @@
   "description": "Supply-chain threat detection & response for npm",
   "main": "src/index.js",
   "bin": {
-    "muaddib": "./bin/muaddib.js"
+    "muaddib": "bin/muaddib.js"
   },
   "scripts": {
     "test": "node tests/run-tests.js",
@@ -26,7 +26,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DNSZLSK/muad-dib.git"
+    "url": "git+https://github.com/DNSZLSK/muad-dib.git"
   },
   "homepage": "https://github.com/DNSZLSK/muad-dib",
   "bugs": {
