@@ -2,7 +2,7 @@
   "name": "muaddib-vscode",
   "displayName": "MUAD'DIB Security Scanner",
   "description": "Detecte les attaques supply chain npm directement dans VS Code",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "publisher": "dnszlsk",
   "engines": {
     "vscode": "^1.85.0"
@@ -49,7 +49,12 @@
         },
         "muaddib.failLevel": {
           "type": "string",
-          "enum": ["critical", "high", "medium", "low"],
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ],
           "default": "high",
           "description": "Niveau de severite pour afficher les alertes"
         }

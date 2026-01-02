@@ -59,7 +59,7 @@ async function scanProject() {
       const webhookUrl = config.get('webhookUrl');
       const failLevel = config.get('failLevel');
 
-      let cmd = `node "${path.join(__dirname, '..', 'bin', 'muaddib.js')}" scan "${projectPath}" --json`;
+      let cmd = `npx muaddib-scanner scan "${projectPath}" --json`;
       if (webhookUrl) {
         cmd += ` --webhook "${webhookUrl}"`;
       }
