@@ -106,6 +106,9 @@ const PLAYBOOKS = {
 
   suspicious_dataflow:
     'CRITIQUE: Code lit des credentials et les envoie sur le reseau. Exfiltration probable. Isoler la machine, regenerer tous les secrets.',
+
+  typosquat_detected:
+    'ATTENTION: Ce package a un nom tres similaire a un package populaire. Verifier que c\'est bien le bon package. Si erreur de frappe, corriger immediatement.',
 };
 
 function getPlaybook(threatType) {

@@ -179,7 +179,20 @@ const RULES = {
       'https://blog.phylum.io/shai-hulud-npm-worm'
     ],
     mitre: 'T1041'
-  }
+  },
+
+  typosquat_detected: {
+    id: 'MUADDIB-TYPO-001',
+    name: 'Typosquatting Detected',
+    severity: 'HIGH',
+    confidence: 'high',
+    description: 'Package avec un nom tres similaire a un package populaire. Possible typosquatting.',
+    references: [
+      'https://blog.npmjs.org/post/163723642530/crossenv-malware-on-the-npm-registry',
+      'https://snyk.io/blog/typosquatting-attacks/'
+    ],
+    mitre: 'T1195.002'
+  },
 };
 
 function getRule(type) {
