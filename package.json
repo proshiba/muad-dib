@@ -1,6 +1,6 @@
 {
   "name": "muaddib-scanner",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Supply-chain threat detection & response for npm",
   "main": "src/index.js",
   "bin": {
