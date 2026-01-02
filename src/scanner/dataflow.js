@@ -3,7 +3,7 @@ const path = require('path');
 const acorn = require('acorn');
 const walk = require('acorn-walk');
 
-const EXCLUDED_DIRS = ['test', 'tests', 'node_modules', '.git', 'src'];
+const EXCLUDED_DIRS = ['test', 'tests', 'node_modules', '.git', 'src', 'vscode-extension'];
 
 async function analyzeDataFlow(targetPath) {
   const threats = [];
