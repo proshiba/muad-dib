@@ -5,7 +5,7 @@
 <h1 align="center">MUAD'DIB</h1>
 
 <p align="center">
-  <strong>Supply-chain threat detection & response for npm</strong>
+  <strong>Supply-chain threat detection and response for npm</strong>
 </p>
 
 <p align="center">
@@ -17,45 +17,51 @@
 
 <p align="center">
   <a href="#installation">Installation</a> |
-  <a href="#utilisation">Utilisation</a> |
+  <a href="#usage">Usage</a> |
   <a href="#features">Features</a> |
   <a href="#vs-code">VS Code</a> |
-  <a href="#discord">Discord</a>
+  <a href="#ci-cd">CI/CD</a>
+</p>
+
+<p align="center">
+  <a href="README.fr.md">Version francaise</a>
 </p>
 
 ---
 
-## Pourquoi MUAD'DIB ?
+## Why MUAD'DIB?
 
-Les attaques supply chain npm explosent. Shai-Hulud a compromis 25K+ repos en 2025. Les outils existants detectent, mais n'aident pas a repondre.
+npm supply-chain attacks are exploding. Shai-Hulud compromised 25K+ repos in 2025. Existing tools detect threats but don't help you respond.
 
-MUAD'DIB detecte ET guide la reponse.
+MUAD'DIB detects AND guides your response.
 
-| Feature | MUAD'DIB | Socket | Snyk |
-|---------|----------|--------|------|
-| Detection IOCs | Oui | Oui | Oui |
-| Analyse AST | Oui | Oui | Non |
-| Analyse Dataflow | Oui | Non | Non |
-| Detection Typosquatting | Oui | Oui | Non |
-| Playbooks reponse | Oui | Non | Non |
-| Score de risque | Oui | Oui | Oui |
-| SARIF / GitHub Security | Oui | Oui | Oui |
-| MITRE ATT&CK mapping | Oui | Non | Non |
-| Webhook Discord/Slack | Oui | Non | Non |
-| Extension VS Code | Oui | Oui | Oui |
-| Mode daemon | Oui | Non | Non |
-| 100% Open Source | Oui | Non | Non |
+| Feature | MUAD'DIB | Socket | Snyk | Opengrep |
+|---------|----------|--------|------|----------|
+| IOC Detection | Yes | Yes | Yes | No |
+| AST Analysis | Yes | Yes | No | Yes |
+| Dataflow Analysis | Yes | No | No | No |
+| Typosquatting Detection | Yes | Yes | No | No |
+| Response Playbooks | Yes | No | No | No |
+| Risk Score | Yes | Yes | Yes | No |
+| SARIF / GitHub Security | Yes | Yes | Yes | Yes |
+| MITRE ATT&CK Mapping | Yes | No | No | No |
+| Discord/Slack Webhooks | Yes | No | No | No |
+| VS Code Extension | Yes | Yes | Yes | No |
+| Daemon Mode | Yes | No | No | No |
+| 100% Open Source | Yes | No | No | Yes |
 
 ---
 
 ## Installation
 
-### npm (recommande)
+### npm (recommended)
+
 ```bash
 npm install -g muaddib-scanner
 ```
 
-### Depuis les sources
+### From source
+
 ```bash
 git clone https://github.com/DNSZLSK/muad-dib.git
 cd muad-dib
@@ -64,111 +70,130 @@ npm install
 
 ---
 
-## Utilisation
+## Usage
 
-### Scan basique
+### Basic scan
+
 ```bash
 muaddib scan .
-muaddib scan /chemin/vers/projet
+muaddib scan /path/to/project
 ```
 
-### Score de risque
+### Risk score
 
-Chaque scan affiche un score de risque 0-100 :
+Each scan displays a 0-100 risk score:
+
 ```
 [SCORE] 58/100 [███████████░░░░░░░░░] HIGH
 ```
 
-### Mode explain (details complets)
+### Explain mode (full details)
+
 ```bash
 muaddib scan . --explain
 ```
 
-Affiche pour chaque detection :
+Shows for each detection:
 - Rule ID
 - MITRE ATT&CK technique
 - References (articles, CVEs)
-- Playbook de reponse
+- Response playbook
 
 ### Export
+
 ```bash
 muaddib scan . --json > results.json     # JSON
-muaddib scan . --html rapport.html       # HTML
+muaddib scan . --html report.html        # HTML
 muaddib scan . --sarif results.sarif     # SARIF (GitHub Security)
 ```
 
-### Seuil de severite
+### Severity threshold
+
 ```bash
-muaddib scan . --fail-on critical  # Fail seulement sur CRITICAL
-muaddib scan . --fail-on high      # Fail sur HIGH et CRITICAL (defaut)
-muaddib scan . --fail-on medium    # Fail sur MEDIUM, HIGH, CRITICAL
+muaddib scan . --fail-on critical  # Fail only on CRITICAL
+muaddib scan . --fail-on high      # Fail on HIGH and CRITICAL (default)
+muaddib scan . --fail-on medium    # Fail on MEDIUM, HIGH, CRITICAL
 ```
 
-### Webhook Discord/Slack
+### Discord/Slack webhook
+
 ```bash
 muaddib scan . --webhook "https://discord.com/api/webhooks/..."
 ```
 
-Envoie une alerte avec le score et les menaces sur Discord ou Slack.
+Sends an alert with score and threats to Discord or Slack.
 
-### Surveillance temps reel
+### Real-time monitoring
+
 ```bash
 muaddib watch .
 ```
 
-### Mode daemon
+### Daemon mode
+
 ```bash
 muaddib daemon
 muaddib daemon --webhook "https://discord.com/api/webhooks/..."
 ```
 
-Surveille automatiquement tous les `npm install` et scanne les nouveaux packages.
+Automatically monitors all `npm install` commands and scans new packages.
 
-### Mise a jour des IOCs
+### Update IOCs
+
 ```bash
 muaddib update
 ```
+
+### Scrape new IOCs
+
+```bash
+muaddib scrape
+```
+
+Fetches latest malicious packages from GitHub Advisories, OSV, and other sources.
 
 ---
 
 ## Features
 
-### Detection typosquatting
+### Typosquatting detection
 
-MUAD'DIB detecte les packages dont le nom ressemble a un package populaire :
-```
-[HIGH] Package "lodahs" ressemble a "lodash" (swapped_chars). Possible typosquatting.
-```
+MUAD'DIB detects packages with names similar to popular packages:
 
-### Analyse dataflow
-
-Detecte quand du code lit des credentials ET les envoie sur le reseau :
 ```
-[CRITICAL] Flux suspect: lecture credentials (readFileSync, GITHUB_TOKEN) + envoi reseau (fetch)
+[HIGH] Package "lodahs" looks like "lodash" (swapped_chars). Possible typosquatting.
 ```
 
-### Attaques detectees
+### Dataflow analysis
 
-| Campagne | Packages | Status |
+Detects when code reads credentials AND sends them over the network:
+
+```
+[CRITICAL] Suspicious flow: credential read (readFileSync, GITHUB_TOKEN) + network send (fetch)
+```
+
+### Detected attacks
+
+| Campaign | Packages | Status |
 |----------|----------|--------|
-| Shai-Hulud v1 | @ctrl/tinycolor, ng2-file-upload | Detecte |
-| Shai-Hulud v2 | @asyncapi/specs, posthog-node, kill-port | Detecte |
-| Shai-Hulud v3 | @vietmoney/react-big-calendar | Detecte |
-| event-stream (2018) | flatmap-stream, event-stream | Detecte |
-| eslint-scope (2018) | eslint-scope | Detecte |
-| Protestware | node-ipc, colors, faker | Detecte |
-| Typosquats | crossenv, mongose, babelcli | Detecte |
+| Shai-Hulud v1 | @ctrl/tinycolor, ng2-file-upload | Detected |
+| Shai-Hulud v2 | @asyncapi/specs, posthog-node, kill-port | Detected |
+| Shai-Hulud v3 | @vietmoney/react-big-calendar | Detected |
+| event-stream (2018) | flatmap-stream, event-stream | Detected |
+| eslint-scope (2018) | eslint-scope | Detected |
+| Protestware | node-ipc, colors, faker | Detected |
+| Typosquats | crossenv, mongose, babelcli | Detected |
 
-### Techniques detectees
+### Detected techniques
 
 | Technique | MITRE | Detection |
 |-----------|-------|-----------|
-| Vol credentials (.npmrc, .ssh) | T1552.001 | AST |
-| Exfiltration env vars | T1552.001 | AST |
-| Execution code distant | T1105 | Pattern |
+| Credential theft (.npmrc, .ssh) | T1552.001 | AST |
+| Env var exfiltration | T1552.001 | AST |
+| Remote code execution | T1105 | Pattern |
 | Reverse shell | T1059.004 | Pattern |
 | Dead man's switch | T1485 | Pattern |
-| Code obfusque | T1027 | Heuristiques |
+| Obfuscated code | T1027 | Heuristics |
 | Typosquatting | T1195.002 | Levenshtein |
 | Supply chain compromise | T1195.002 | IOC matching |
 
@@ -176,32 +201,33 @@ Detecte quand du code lit des credentials ET les envoie sur le reseau :
 
 ## VS Code
 
-L'extension VS Code scanne automatiquement vos projets npm.
+The VS Code extension automatically scans your npm projects.
 
 ### Installation
 
-Le dossier `vscode-extension/` contient l'extension. Pour tester :
+Search "MUAD'DIB" in VS Code Extensions, or:
 
-1. Ouvrir le dossier `vscode-extension` dans VS Code
-2. Appuyer sur F5
-3. Dans la nouvelle fenetre, ouvrir un projet npm
+```bash
+code --install-extension dnszlsk.muaddib-vscode
+```
 
-### Commandes
+### Commands
 
-- `MUAD'DIB: Scan Project` - Scanner tout le projet
-- `MUAD'DIB: Scan Current File` - Scanner le fichier actuel
+- `MUAD'DIB: Scan Project` - Scan entire project
+- `MUAD'DIB: Scan Current File` - Scan current file
 
-### Configuration
+### Settings
 
-- `muaddib.autoScan` - Scanner automatiquement a l'ouverture (defaut: true)
-- `muaddib.webhookUrl` - URL webhook Discord/Slack
-- `muaddib.failLevel` - Niveau d'alerte (critical/high/medium/low)
+- `muaddib.autoScan` - Auto-scan on project open (default: true)
+- `muaddib.webhookUrl` - Discord/Slack webhook URL
+- `muaddib.failLevel` - Alert level (critical/high/medium/low)
 
 ---
 
-## Integration CI/CD
+## CI/CD
 
 ### GitHub Actions
+
 ```yaml
 name: Security Scan
 
@@ -225,20 +251,12 @@ jobs:
           sarif_file: results.sarif
 ```
 
-Les alertes apparaissent dans Security > Code scanning alerts.
-
----
-
-## Discord
-
-Rejoignez le serveur Discord pour :
-- Recevoir les alertes de scan
-- Partager des IOCs
-- Contribuer au projet
+Alerts appear in Security > Code scanning alerts.
 
 ---
 
 ## Architecture
+
 ```
 MUAD'DIB Scanner
 |
@@ -259,11 +277,12 @@ Output (CLI, JSON, HTML, SARIF, Webhook)
 
 ---
 
-## Contribuer
+## Contributing
 
-### Ajouter des IOCs
+### Add IOCs
 
-Editez les fichiers YAML dans `iocs/` :
+Edit YAML files in `iocs/`:
+
 ```yaml
 - id: NEW-MALWARE-001
   name: "malicious-package"
@@ -271,13 +290,14 @@ Editez les fichiers YAML dans `iocs/` :
   severity: critical
   confidence: high
   source: community
-  description: "Description de la menace"
+  description: "Threat description"
   references:
     - https://example.com/article
   mitre: T1195.002
 ```
 
-### Developper
+### Development
+
 ```bash
 git clone https://github.com/DNSZLSK/muad-dib.git
 cd muad-dib
@@ -289,12 +309,12 @@ npm test
 
 ## Documentation
 
-- [Threat Model](docs/threat-model.md) - Ce que MUAD'DIB detecte et ne detecte pas
-- [IOCs YAML](iocs/) - Base de donnees des menaces
+- [Threat Model](docs/threat-model.md) - What MUAD'DIB detects and doesn't detect
+- [IOCs YAML](iocs/) - Threat database
 
 ---
 
-## Licence
+## License
 
 MIT
 
