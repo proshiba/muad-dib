@@ -10,9 +10,9 @@
 
 <p align="center">
   <img src="https://img.shields.io/npm/v/muaddib-scanner" alt="npm version">
-  <img src="https://img.shields.io/npm/dt/muaddib-scanner" alt="npm downloads">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node">
+  <img src="https://img.shields.io/badge/IOCs-180%2B-red" alt="IOCs">
 </p>
 
 <p align="center">
