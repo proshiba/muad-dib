@@ -1,0 +1,98 @@
+# Contributing to MUAD'DIB
+
+Thanks for your interest in improving MUAD'DIB!
+
+## Ways to contribute
+
+### 1. Add new IOCs (Indicators of Compromise)
+
+Edit `iocs/packages.yaml` and add:
+```yaml
+- id: MALWARE-XXX-001
+  name: "malicious-package-name"
+  version: "*"
+  severity: critical
+  confidence: high
+  source: your-name
+  description: "Short description of the threat"
+  references:
+    - https://link-to-blog-or-advisory
+  mitre: T1195.002
+```
+
+**Severity levels:** critical, high, medium, low
+
+**MITRE techniques:**
+- T1195.002 — Supply chain compromise
+- T1552.001 — Credentials in files
+- T1059 — Command execution
+- T1027 — Obfuscation
+- T1041 — Exfiltration
+
+### 2. Add detection rules
+
+Edit `src/rules/index.js` and add a new rule:
+```javascript
+my_new_rule: {
+  id: 'MUADDIB-XXX-001',
+  name: 'My New Detection',
+  severity: 'HIGH',
+  confidence: 'high',
+  description: 'What this rule detects',
+  references: ['https://...'],
+  mitre: 'T1195.002'
+}
+```
+
+### 3. Add response playbooks
+
+Edit `src/response/playbooks.js` and add:
+```javascript
+case 'my_new_rule':
+  return 'Step-by-step response instructions';
+```
+
+### 4. Report false positives
+
+Open an issue with:
+- Package name
+- Detection rule triggered
+- Why it's a false positive
+
+### 5. Report missed detections
+
+Open an issue with:
+- Malicious package name
+- What it does
+- Links to advisories
+
+## Development
+```bash
+git clone https://github.com/DNSZLSK/muad-dib.git
+cd muad-dib
+npm install
+npm test
+```
+
+## Testing your changes
+```bash
+node bin/muaddib.js scan tests/samples --explain
+```
+
+## Pull request process
+
+1. Fork the repo
+2. Create a branch (`git checkout -b feature/my-feature`)
+3. Make your changes
+4. Run tests (`npm test`)
+5. Commit (`git commit -m "Add my feature"`)
+6. Push (`git push origin feature/my-feature`)
+7. Open a Pull Request
+
+## Code of conduct
+
+Be respectful. We're all here to make npm safer.
+
+## Questions?
+
+Open an issue or join our Discord: https://discord.gg/y8zxSmue

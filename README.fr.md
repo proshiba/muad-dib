@@ -285,6 +285,11 @@ npm install
 npm test
 ```
 
+## Communaute
+
+- Discord: https://discord.gg/y8zxSmue
+- Issues: https://github.com/DNSZLSK/muad-dib/issues
+
 ---
 
 ## Documentation
