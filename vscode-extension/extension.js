@@ -65,10 +65,17 @@ async function scanProject() {
       }
 
       exec(cmd, { maxBuffer: 10 * 1024 * 1024 }, (error, stdout, stderr) => {
-        try {
-          const result = JSON.parse(stdout);
-          displayResults(result, projectPath);
-        } catch (e) {
+  try {
+    // Si pas de JSON valide, c'est que le scan est propre
+    if (!stdout || !stdout.trim().startsWith('{')) {
+      vscode.window.showInformationMessage('MUAD\'DIB: Aucune menace detectee');
+      diagnosticCollection.clear();
+      resolve();
+      return;
+    }
+    const result = JSON.parse(stdout);
+    displayResults(result, projectPath);
+  } catch (e) {
           if (stdout.includes('Aucune menace')) {
             vscode.window.showInformationMessage('MUAD\'DIB: Aucune menace detectee');
             diagnosticCollection.clear();
