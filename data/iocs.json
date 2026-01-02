@@ -722,6 +722,1426 @@
       ],
       "mitre": "T1195.002",
       "cve": "CVE-2025-64764"
+    },
+    {
+      "id": "SOCKET-@pnpm.exe/pnpm",
+      "name": "@pnpm.exe/pnpm",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-shai-hulud",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/@pnpm.exe/pnpm"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-@nicklason/npm",
+      "name": "@nicklason/npm",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-shai-hulud",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/@nicklason/npm"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-bb-builder",
+      "name": "bb-builder",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-shai-hulud",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/bb-builder"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-codespaces-blank",
+      "name": "codespaces-blank",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-shai-hulud",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/codespaces-blank"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-crypto-browserify-aes",
+      "name": "crypto-browserify-aes",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-crypto-stealer",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/crypto-browserify-aes"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-eth-wallet-gen",
+      "name": "eth-wallet-gen",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-crypto-stealer",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/eth-wallet-gen"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-solana-wallet-tools",
+      "name": "solana-wallet-tools",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-crypto-stealer",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/solana-wallet-tools"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-discord-selfbot-v13",
+      "name": "discord-selfbot-v13",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-discord-stealer",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/discord-selfbot-v13"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-discord-token-grabber",
+      "name": "discord-token-grabber",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-discord-stealer",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/discord-token-grabber"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-discordbot-tokens",
+      "name": "discordbot-tokens",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "socket-discord-stealer",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/discordbot-tokens"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-electrn",
+      "name": "electrn",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/electrn"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-reqeusts",
+      "name": "reqeusts",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/reqeusts"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-requets",
+      "name": "requets",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/requets"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-requsests",
+      "name": "requsests",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/requsests"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-axois",
+      "name": "axois",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/axois"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-axio",
+      "name": "axio",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/axio"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-lodahs",
+      "name": "lodahs",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/lodahs"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-lodasg",
+      "name": "lodasg",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/lodasg"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-expres",
+      "name": "expres",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/expres"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-expresss",
+      "name": "expresss",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/expresss"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-momnet",
+      "name": "momnet",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/momnet"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-monment",
+      "name": "monment",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/monment"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-recat",
+      "name": "recat",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/recat"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-reactt",
+      "name": "reactt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/reactt"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-chalks",
+      "name": "chalks",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/chalks"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-chalkk",
+      "name": "chalkk",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-typosquat",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/chalkk"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-styled-components-native",
+      "name": "styled-components-native",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "socket-protestware",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/styled-components-native"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "SOCKET-es5-ext",
+      "name": "es5-ext",
+      "version": "*",
+      "severity": "medium",
+      "confidence": "high",
+      "source": "socket-protestware",
+      "description": "Malicious package reported by Socket.dev",
+      "references": [
+        "https://socket.dev/npm/package/es5-ext"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-@nicklason/npm-register",
+      "name": "@nicklason/npm-register",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-lemaaa",
+      "name": "lemaaa",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-badshell",
+      "name": "badshell",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-node-shell",
+      "name": "node-shell",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-reverse-shell-as-a-service",
+      "name": "reverse-shell-as-a-service",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-browserify-sign-steal",
+      "name": "browserify-sign-steal",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-npm-script-demo",
+      "name": "npm-script-demo",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-load-from-cwd-or-npm",
+      "name": "load-from-cwd-or-npm",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-loadyaml-",
+      "name": "loadyaml-",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-preinstall-script",
+      "name": "preinstall-script",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "PHYLUM-postinstall-script",
+      "name": "postinstall-script",
+      "version": "*",
+      "severity": "high",
+      "confidence": "high",
+      "source": "phylum",
+      "description": "Malicious package reported by Phylum Research",
+      "references": [
+        "https://blog.phylum.io"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-event-stream",
+      "name": "event-stream",
+      "version": "3.3.6",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Malicious code injection",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-flatmap-stream",
+      "name": "flatmap-stream",
+      "version": "0.1.1",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Bitcoin wallet stealer",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-eslint-scope",
+      "name": "eslint-scope",
+      "version": "3.7.2",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: npm token stealer",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-eslint-config-eslint",
+      "name": "eslint-config-eslint",
+      "version": "5.0.2",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: npm token stealer",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-getcookies",
+      "name": "getcookies",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Backdoor",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-mailparser",
+      "name": "mailparser",
+      "version": "2.0.5",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Malicious code",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-bootstrap-sass",
+      "name": "bootstrap-sass",
+      "version": "3.4.1",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Backdoor injection",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-twilio-npm",
+      "name": "twilio-npm",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Typosquat malware",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-discord.js-self",
+      "name": "discord.js-self",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Token stealer",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-fallguys",
+      "name": "fallguys",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Malware",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "NPM-REMOVED-am-i-going-to-miss-my-flight",
+      "name": "am-i-going-to-miss-my-flight",
+      "version": "*",
+      "severity": "critical",
+      "confidence": "high",
+      "source": "npm-removed",
+      "description": "Removed from npm: Test malware",
+      "references": [
+        "https://www.npmjs.com/policies/security"
+      ],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-lodash-",
+      "name": "lodash-",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"lodash\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO--lodash",
+      "name": "-lodash",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"lodash\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-lodas",
+      "name": "lodas",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"lodash\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-lodashh",
+      "name": "lodashh",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"lodash\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-exprees",
+      "name": "exprees",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"express\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-exprss",
+      "name": "exprss",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"express\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-exppress",
+      "name": "exppress",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"express\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-reacct",
+      "name": "reacct",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"react\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-raect",
+      "name": "raect",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"react\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-reactjs-",
+      "name": "reactjs-",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"react\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-reakt",
+      "name": "reakt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"react\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-axioss",
+      "name": "axioss",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"axios\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-axiso",
+      "name": "axiso",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"axios\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-axius",
+      "name": "axius",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"axios\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-momment",
+      "name": "momment",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"moment\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-momet",
+      "name": "momet",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"moment\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-momentt",
+      "name": "momentt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"moment\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-chlak",
+      "name": "chlak",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"chalk\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-chalck",
+      "name": "chalck",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"chalk\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-comander",
+      "name": "comander",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"commander\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-commanderr",
+      "name": "commanderr",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"commander\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-comandr",
+      "name": "comandr",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"commander\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-webpck",
+      "name": "webpck",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"webpack\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-webpak",
+      "name": "webpak",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"webpack\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-weback",
+      "name": "weback",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"webpack\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-webpackk",
+      "name": "webpackk",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"webpack\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-typscript",
+      "name": "typscript",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"typescript\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-typsecript",
+      "name": "typsecript",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"typescript\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-typescrip",
+      "name": "typescrip",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"typescript\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-typescipt",
+      "name": "typescipt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"typescript\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-eslit",
+      "name": "eslit",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"eslint\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-eslnt",
+      "name": "eslnt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"eslint\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-esllint",
+      "name": "esllint",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"eslint\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-eslintjs",
+      "name": "eslintjs",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"eslint\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-pretier",
+      "name": "pretier",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"prettier\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-pretiier",
+      "name": "pretiier",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"prettier\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-prittier",
+      "name": "prittier",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"prettier\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-prettir",
+      "name": "prettir",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"prettier\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-mongose",
+      "name": "mongose",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"mongoose\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-mongoos",
+      "name": "mongoos",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"mongoose\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-mongoosee",
+      "name": "mongoosee",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"mongoose\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-mongooose",
+      "name": "mongooose",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"mongoose\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-elctron",
+      "name": "elctron",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"electron\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-elecrton",
+      "name": "elecrton",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"electron\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-pupeteer",
+      "name": "pupeteer",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"puppeteer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-puppetter",
+      "name": "puppetter",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"puppeteer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-pupetear",
+      "name": "pupetear",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"puppeteer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-puppetee",
+      "name": "puppetee",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"puppeteer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-dotevn",
+      "name": "dotevn",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"dotenv\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-doteenv",
+      "name": "doteenv",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"dotenv\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-dotnev",
+      "name": "dotnev",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"dotenv\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-dotenv-",
+      "name": "dotenv-",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"dotenv\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-uuidd",
+      "name": "uuidd",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"uuid\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-uudi",
+      "name": "uudi",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"uuid\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-uud",
+      "name": "uud",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"uuid\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-uuid-js",
+      "name": "uuid-js",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"uuid\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-bcript",
+      "name": "bcript",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"bcrypt\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-bcryt",
+      "name": "bcryt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"bcrypt\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-bcrytp",
+      "name": "bcrytp",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"bcrypt\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-bycrpt",
+      "name": "bycrpt",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"bcrypt\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-jsonwebtokn",
+      "name": "jsonwebtokn",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"jsonwebtoken\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-jsonwebtoke",
+      "name": "jsonwebtoke",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"jsonwebtoken\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-jwttoken",
+      "name": "jwttoken",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"jsonwebtoken\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-nodemailr",
+      "name": "nodemailr",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"nodemailer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-nodemailler",
+      "name": "nodemailler",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"nodemailer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-nodemalier",
+      "name": "nodemalier",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"nodemailer\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-socketio",
+      "name": "socketio",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"socket.io\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-socet.io",
+      "name": "socet.io",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"socket.io\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-socket-io-",
+      "name": "socket-io-",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"socket.io\"",
+      "references": [],
+      "mitre": "T1195.002"
+    },
+    {
+      "id": "TYPO-soket.io",
+      "name": "soket.io",
+      "version": "*",
+      "severity": "high",
+      "confidence": "medium",
+      "source": "typosquat-db",
+      "description": "Potential typosquat of \"socket.io\"",
+      "references": [],
+      "mitre": "T1195.002"
     }
   ],
   "hashes": [
