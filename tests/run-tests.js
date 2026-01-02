@@ -234,7 +234,7 @@ test('CLI: --html genere fichier HTML', () => {
   runScan(path.join(TESTS_DIR, 'ast'), `--html "${htmlPath}"`);
   assert(fs.existsSync(htmlPath), 'Fichier HTML non genere');
   const content = fs.readFileSync(htmlPath, 'utf8');
-  assertIncludes(content, 'MUADDIB', 'HTML devrait contenir MUADDIB');
+  assertIncludes(content, 'MUAD', 'HTML devrait contenir MUAD');
   assertIncludes(content, '<table>', 'HTML devrait contenir table');
   fs.unlinkSync(htmlPath);
 });

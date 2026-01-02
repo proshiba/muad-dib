@@ -28,7 +28,10 @@ const SENSITIVE_STRINGS = [
   'GITHUB_TOKEN',
   'NPM_TOKEN',
   'AWS_SECRET',
-  'api.github.com'
+  'api.github.com',
+  'Shai-Hulud',
+  'The Second Coming',
+  'Goldox-T3chs'
 ];
 
 async function analyzeAST(targetPath) {
@@ -83,6 +86,17 @@ function analyzeFile(content, filePath, basePath) {
           type: 'dangerous_call_' + callName.toLowerCase(),
           severity: callName === 'eval' ? 'HIGH' : 'MEDIUM',
           message: `Appel dangereux "${callName}" detecte.`,
+          file: path.relative(basePath, filePath)
+        });
+      }
+    },
+
+    NewExpression(node) {
+      if (node.callee.type === 'Identifier' && node.callee.name === 'Function') {
+        threats.push({
+          type: 'dangerous_call_function',
+          severity: 'HIGH',
+          message: 'Appel dangereux "new Function()" detecte.',
           file: path.relative(basePath, filePath)
         });
       }
