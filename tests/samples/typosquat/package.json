@@ -1,0 +1,11 @@
+{
+  "name": "test-typosquat",
+  "version": "1.0.0",
+  "dependencies": {
+    "lodahs": "^1.0.0",
+    "axois": "^1.0.0",
+    "expres": "^1.0.0",
+    "recat": "^1.0.0",
+    "momnet": "^1.0.0"
+  }
+}

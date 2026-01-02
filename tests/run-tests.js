@@ -199,6 +199,32 @@ test('MARQUEURS: Detecte The Second Coming', () => {
 });
 
 // ============================================
+// TESTS UNITAIRES - DETECTION TYPOSQUATTING
+// ============================================
+
+console.log('\n=== TESTS TYPOSQUATTING ===\n');
+
+test('TYPOSQUAT: Detecte lodahs (lodash)', () => {
+  const output = runScan(path.join(TESTS_DIR, 'typosquat'));
+  assertIncludes(output, 'lodahs', 'Devrait detecter lodahs');
+});
+
+test('TYPOSQUAT: Detecte axois (axios)', () => {
+  const output = runScan(path.join(TESTS_DIR, 'typosquat'));
+  assertIncludes(output, 'axois', 'Devrait detecter axois');
+});
+
+test('TYPOSQUAT: Detecte expres (express)', () => {
+  const output = runScan(path.join(TESTS_DIR, 'typosquat'));
+  assertIncludes(output, 'expres', 'Devrait detecter expres');
+});
+
+test('TYPOSQUAT: Severity HIGH', () => {
+  const output = runScan(path.join(TESTS_DIR, 'typosquat'));
+  assertIncludes(output, 'HIGH', 'Devrait etre HIGH');
+});
+
+// ============================================
 // TESTS INTEGRATION - CLI
 // ============================================
 
