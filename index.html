@@ -10,10 +10,16 @@
     html, body {
       margin: 0;
       padding: 0;
-      min-height: 100%;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #0b0f14;
       color: #e5e7eb;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
       line-height: 1.6;
     }
 
@@ -28,8 +34,12 @@
     }
 
     header {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
+      flex: 1; /* prend tout l’espace restant pour centrer le contenu verticalement */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
     }
 
     header img {
@@ -46,7 +56,7 @@
 
     p.description {
       max-width: 600px;
-      margin: 0.5rem auto 1rem;
+      margin: 0.5rem auto 2rem;
       color: #9ca3af;
       font-size: 1.1rem;
     }
@@ -65,48 +75,11 @@
       background: #be123c;
     }
 
-    main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-
-    h2 {
-      color: #f87171;
-      margin-top: 2rem;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 1rem 0;
-    }
-
-    th, td {
-      border: 1px solid #374151;
-      padding: 0.5rem;
-      text-align: center;
-    }
-
-    th {
-      background-color: #1f2937;
-    }
-
-    pre {
-      background: #111826;
-      padding: 1rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      color: #e5e7eb;
-    }
-
     footer {
       padding: 1.5rem 1rem;
-      text-align: center;
       color: #9ca3af;
       font-size: 0.9rem;
       border-top: 1px solid #1f2937;
-      margin-top: 3rem;
     }
   </style>
 </head>
@@ -116,216 +89,14 @@
   <header>
     <img src="https://i.imgur.com/bXUlPZ9.png" alt="MUAD'DIB Logo" />
     <h1>MUAD'DIB</h1>
-    <p class="description">
-      Supply-chain threat detection and response for npm.<br>
-      Open-source CLI scanner and VS Code extension.
-    </p>
+    <p class="description">Supply-chain threat detection and response for npm. <br>Open-source CLI scanner and VS Code extension.</p>
     <a href="https://github.com/DNSZLSK/muad-dib" target="_blank" class="github-link">View the project on GitHub</a>
   </header>
 
-  <!-- Main content -->
-  <main>
-
-    <h2>Why MUAD'DIB?</h2>
-    <p>npm supply-chain attacks are exploding. Shai-Hulud compromised 25K+ repos in 2025. Existing tools detect threats but don't help you respond.</p>
-    <p>MUAD'DIB detects AND guides your response.</p>
-
-    <h2>Features Comparison</h2>
-    <table>
-      <tr>
-        <th>Feature</th><th>MUAD'DIB</th><th>Socket</th><th>Snyk</th><th>Opengrep</th>
-      </tr>
-      <tr><td>IOC Detection</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-      <tr><td>AST Analysis</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-      <tr><td>Dataflow Analysis</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td></tr>
-      <tr><td>Typosquatting Detection</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-      <tr><td>Response Playbooks</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
-      <tr><td>Risk Score</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-      <tr><td>SARIF / GitHub Security</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-      <tr><td>MITRE ATT&CK Mapping</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
-      <tr><td>Discord/Slack Webhooks</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
-      <tr><td>VS Code Extension</td><td>Yes</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-      <tr><td>Daemon Mode</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
-      <tr><td>100% Open Source</td><td>Yes</td><td>No</td><td>No</td><td>Yes</td></tr>
-    </table>
-
-    <h2>Installation</h2>
-    <p><strong>npm (recommended)</strong></p>
-    <pre>npm install -g muaddib-scanner</pre>
-
-    <p><strong>From source</strong></p>
-    <pre>
-git clone https://github.com/DNSZLSK/muad-dib.git
-cd muad-dib
-npm install
-    </pre>
-
-    <h2>Usage</h2>
-    <p><strong>Basic scan</strong></p>
-    <pre>
-muaddib scan .
-muaddib scan /path/to/project
-    </pre>
-
-    <p><strong>Risk score</strong></p>
-    <pre>
-[SCORE] 58/100 [███████████░░░░░░░░░] HIGH
-    </pre>
-
-    <p><strong>Explain mode (full details)</strong></p>
-    <pre>
-muaddib scan . --explain
-    </pre>
-
-    <p><strong>Export</strong></p>
-    <pre>
-muaddib scan . --json &gt; results.json
-muaddib scan . --html report.html
-muaddib scan . --sarif results.sarif
-    </pre>
-
-    <p><strong>Severity threshold</strong></p>
-    <pre>
-muaddib scan . --fail-on critical
-muaddib scan . --fail-on high
-muaddib scan . --fail-on medium
-    </pre>
-
-    <p><strong>Discord/Slack webhook</strong></p>
-    <pre>
-muaddib scan . --webhook "https://discord.com/api/webhooks/..."
-    </pre>
-
-    <p><strong>Real-time monitoring</strong></p>
-    <pre>muaddib watch .</pre>
-
-    <p><strong>Daemon mode</strong></p>
-    <pre>
-muaddib daemon
-muaddib daemon --webhook "https://discord.com/api/webhooks/..."
-    </pre>
-
-    <p><strong>Update IOCs</strong></p>
-    <pre>muaddib update</pre>
-
-    <p><strong>Scrape new IOCs</strong></p>
-    <pre>muaddib scrape</pre>
-
-    <h2>Detected attacks</h2>
-    <table>
-      <tr><th>Campaign</th><th>Packages</th><th>Status</th></tr>
-      <tr><td>Shai-Hulud v1</td><td>@ctrl/tinycolor, ng2-file-upload</td><td>Detected</td></tr>
-      <tr><td>Shai-Hulud v2</td><td>@asyncapi/specs, posthog-node, kill-port</td><td>Detected</td></tr>
-      <tr><td>Shai-Hulud v3</td><td>@vietmoney/react-big-calendar</td><td>Detected</td></tr>
-      <tr><td>event-stream (2018)</td><td>flatmap-stream, event-stream</td><td>Detected</td></tr>
-      <tr><td>Protestware</td><td>node-ipc, colors, faker</td><td>Detected</td></tr>
-      <tr><td>Typosquats</td><td>crossenv, mongose, babelcli</td><td>Detected</td></tr>
-    </table>
-
-    <h2>Detected techniques</h2>
-    <table>
-      <tr><th>Technique</th><th>MITRE</th><th>Detection</th></tr>
-      <tr><td>Credential theft (.npmrc, .ssh)</td><td>T1552.001</td><td>AST</td></tr>
-      <tr><td>Env var exfiltration</td><td>T1552.001</td><td>AST</td></tr>
-      <tr><td>Remote code execution</td><td>T1105</td><td>Pattern</td></tr>
-      <tr><td>Reverse shell</td><td>T1059.004</td><td>Pattern</td></tr>
-      <tr><td>Dead man's switch</td><td>T1485</td><td>Pattern</td></tr>
-      <tr><td>Obfuscated code</td><td>T1027</td><td>Heuristics</td></tr>
-      <tr><td>Typosquatting</td><td>T1195.002</td><td>Levenshtein</td></tr>
-      <tr><td>Supply chain compromise</td><td>T1195.002</td><td>IOC matching</td></tr>
-    </table>
-
-    <h2>VS Code Extension</h2>
-    <p>Installation: search "MUAD'DIB" in VS Code Extensions or run:</p>
-    <pre>code --install-extension dnszlsk.muaddib-vscode</pre>
-    <p>Commands: Scan Project, Scan Current File</p>
-    <p>Settings: autoScan, webhookUrl, failLevel</p>
-
-    <h2>CI/CD (GitHub Actions)</h2>
-    <pre>
-name: Security Scan
-
-on: [push, pull_request]
-
-jobs:
-  scan:
-    runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm install -g muaddib-scanner
-      - run: muaddib scan . --sarif results.sarif
-      - uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: results.sarif
-    </pre>
-
-    <h2>Architecture</h2>
-    <pre>
-MUAD'DIB Scanner
-|
-+-- IOC Match (YAML DB)
-+-- AST Parse (acorn)
-+-- Pattern Matching (shell, scripts)
-+-- Typosquat Detection (Levenshtein)
-|
-v
-Dataflow Analysis (credential read -> network send)
-|
-v
-Threat Enrichment (rules, MITRE ATT&CK, playbooks)
-|
-v
-Output (CLI, JSON, HTML, SARIF, Webhook)
-    </pre>
-
-    <h2>Contributing</h2>
-    <p>Edit YAML files in <code>iocs/</code> to add new IOCs.</p>
-    <pre>
-- id: NEW-MALWARE-001
-  name: "malicious-package"
-  version: "*"
-  severity: critical
-  confidence: high
-  source: community
-  description: "Threat description"
-  references:
-    - https://example.com/article
-  mitre: T1195.002
-    </pre>
-
-    <p>Development:</p>
-    <pre>
-git clone https://github.com/DNSZLSK/muad-dib.git
-cd muad-dib
-npm install
-npm test
-    </pre>
-
-    <h2>Community</h2>
-    <ul>
-      <li>Discord: <a href="https://discord.gg/y8zxSmue">https://discord.gg/y8zxSmue</a></li>
-      <li>Issues: <a href="https://github.com/DNSZLSK/muad-dib/issues">https://github.com/DNSZLSK/muad-dib/issues</a></li>
-    </ul>
-
-    <h2>Documentation</h2>
-    <ul>
-      <li><a href="docs/threat-model.md">Threat Model</a></li>
-      <li><a href="iocs/">IOCs YAML</a></li>
-    </ul>
-
-    <h2>License</h2>
-    <p>MIT</p>
-
-    <p align="center"><strong>The spice must flow. The worms must die.</strong></p>
-
-  </main>
-
+  <!-- Footer -->
+  <footer>
+    &copy;The spice must flow. The worms must die.
+  </footer>
 
 </body>
 </html>
