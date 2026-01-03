@@ -11,27 +11,30 @@ const EXCLUDED_FILES = [
   'src/response/playbooks.js'
 ];
 
-const EXCLUDED_DIRS = ['test', 'tests', 'node_modules', '.git', 'src', 'vscode-extension'];
+const EXCLUDED_DIRS = [
+  'test', 'tests', 'node_modules', '.git', 'src', 'vscode-extension',
+  'scripts', 'bin', 'tools', 'build', 'dist', 'fixtures', 'examples',
+  '__tests__', '__mocks__', 'benchmark', 'benchmarks', 'docs', 'doc'
+];
 
 const DANGEROUS_CALLS = [
   'eval',
-  'Function',
-  'exec',
-  'execSync',
-  'spawn',
-  'spawnSync'
+  'Function'
 ];
 
 const SENSITIVE_STRINGS = [
   '.npmrc',
   '.ssh',
-  'GITHUB_TOKEN',
-  'NPM_TOKEN',
-  'AWS_SECRET',
-  'api.github.com',
   'Shai-Hulud',
   'The Second Coming',
   'Goldox-T3chs'
+];
+
+// Strings qui ne sont PAS suspects
+const SAFE_STRINGS = [
+  'api.github.com',
+  'registry.npmjs.org',
+  'npmjs.com'
 ];
 
 async function analyzeAST(targetPath) {
@@ -45,12 +48,38 @@ async function analyzeAST(targetPath) {
       continue;
     }
     
+    // Ignorer les fichiers dans les dossiers de dev
+    if (isDevFile(relativePath)) {
+      continue;
+    }
+    
     const content = fs.readFileSync(file, 'utf8');
     const fileThreats = analyzeFile(content, file, targetPath);
     threats.push(...fileThreats);
   }
 
   return threats;
+}
+
+function isDevFile(relativePath) {
+  const devPatterns = [
+    /^scripts\//,
+    /^bin\//,
+    /^tools\//,
+    /^build\//,
+    /^fixtures\//,
+    /^examples\//,
+    /^__tests__\//,
+    /^__mocks__\//,
+    /^benchmark/,
+    /^docs?\//,
+    /\.test\.js$/,
+    /\.spec\.js$/,
+    /test\.js$/,
+    /spec\.js$/
+  ];
+  
+  return devPatterns.some(pattern => pattern.test(relativePath));
 }
 
 function analyzeFile(content, filePath, basePath) {
@@ -64,7 +93,6 @@ function analyzeFile(content, filePath, basePath) {
       allowHashBang: true
     });
   } catch (e) {
-    // Fichier non parseable, peut etre obfusque
     if (content.length > 1000 && content.split('\n').length < 10) {
       threats.push({
         type: 'possible_obfuscation',
@@ -76,7 +104,6 @@ function analyzeFile(content, filePath, basePath) {
     return threats;
   }
 
-  // Analyse des appels de fonction
   walk.simple(ast, {
     CallExpression(node) {
       const callName = getCallName(node);
@@ -84,7 +111,7 @@ function analyzeFile(content, filePath, basePath) {
       if (DANGEROUS_CALLS.includes(callName)) {
         threats.push({
           type: 'dangerous_call_' + callName.toLowerCase(),
-          severity: callName === 'eval' ? 'HIGH' : 'MEDIUM',
+          severity: 'HIGH',
           message: `Appel dangereux "${callName}" detecte.`,
           file: path.relative(basePath, filePath)
         });
@@ -104,6 +131,11 @@ function analyzeFile(content, filePath, basePath) {
 
     Literal(node) {
       if (typeof node.value === 'string') {
+        // Ignorer les strings safe
+        if (SAFE_STRINGS.some(s => node.value.includes(s))) {
+          return;
+        }
+        
         for (const sensitive of SENSITIVE_STRINGS) {
           if (node.value.includes(sensitive)) {
             threats.push({
@@ -118,7 +150,6 @@ function analyzeFile(content, filePath, basePath) {
     },
 
     MemberExpression(node) {
-      // Detecte process.env.XXX
       if (
         node.object?.object?.name === 'process' &&
         node.object?.property?.name === 'env'

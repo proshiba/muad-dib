@@ -7,13 +7,13 @@ const POPULAR_PACKAGES = [
   'request', 'async', 'bluebird', 'underscore', 'uuid', 'debug', 'mkdirp',
   'glob', 'minimist', 'webpack', 'babel-core', 'typescript', 'eslint',
   'prettier', 'jest', 'mocha', 'chai', 'sinon', 'mongoose', 'sequelize',
-  'mysql', 'redis', 'mongodb', 'socket.io', 'express-session',
+  'redis', 'mongodb', 'socket.io', 'express-session',
   'body-parser', 'cookie-parser', 'cors', 'helmet', 'morgan', 'dotenv',
   'jsonwebtoken', 'bcrypt', 'passport', 'nodemailer', 'aws-sdk', 'stripe',
-  'twilio', 'firebase', 'graphql', 'apollo-server', 'next', 'nuxt',
+  'twilio', 'firebase', 'graphql', 'apollo-server', 'nuxt',
   'gatsby', 'angular', 'svelte', 'electron', 'puppeteer', 'cheerio',
   'sharp', 'jimp', 'canvas', 'pdf-lib', 'exceljs', 'csv-parser', 'xml2js',
-  'yaml', 'config', 'yargs', 'inquirer', 'ora', 'colors',
+  'yaml', 'config', 'yargs', 'colors',
   'winston', 'bunyan', 'pino', 'log4js', 'ramda', 'immutable',
   'mobx', 'redux', 'zustand', 'formik', 'yup', 'ajv', 'validator',
   'date-fns', 'dayjs', 'luxon', 'numeral', 'accounting', 'currency.js',
@@ -28,7 +28,7 @@ const WHITELIST = [
   'co', 'q', 'n', 'i', 'a', 'v', 'x', 'y', 'z',
   'ejs', 'nyc', 'ini', 'joi', 'vue', 'npm', 'got', 'ora',
   'vary', 'mime', 'send', 'etag', 'raw', 'tar', 'uid', 'cjs',
-  'rxjs', 'yarn', 'pnpm',
+  'rxjs', 'yarn', 'pnpm', 'next',
   
   // Packages legitimes avec noms similaires
   'acorn', 'acorn-walk', 'js-yaml', 'cross-env', 'node-fetch', 'node-gyp',
@@ -42,7 +42,24 @@ const WHITELIST = [
   'depd', 'destroy', 'encodeurl', 'escape-html', 'fresh', 'merge-descriptors',
   'methods', 'on-finished', 'parseurl', 'path-to-regexp', 'proxy-addr',
   'range-parser', 'safe-buffer', 'safer-buffer', 'setprototypeof',
-  'statuses', 'type-is', 'unpipe', 'utils-merge'
+  'statuses', 'type-is', 'unpipe', 'utils-merge',
+  
+  // Packages CLI et outils legitimes
+  'jest-cli', 'prettier-2', 'prettier-1', 'eslint-cli',
+  'inquirer', 'enquirer', 'prompts',
+  'mysql2', 'pg-native', 'sqlite3', 'better-sqlite3',
+  'node-sass', 'sass', 'less',
+  'esbuild', 'rollup', 'parcel', 'vite',
+  'husky', 'lint-staged', 'commitlint',
+  'nodemon', 'pm2', 'forever', 'concurrently',
+  'lerna', 'turbo', 'nx',
+  'chalk', 'colors', 'picocolors', 'colorette',
+  'commander', 'yargs', 'meow', 'cac',
+  'execa', 'shelljs', 'cross-spawn',
+  'rimraf', 'del', 'trash-cli',
+  'globby', 'fast-glob', 'tiny-glob',
+  'chokidar', 'watchpack', 'nsfw',
+  'dotenv', 'dotenv-expand', 'env-cmd'
 ];
 
 // Seuil minimum de longueur pour eviter faux positifs
@@ -86,8 +103,10 @@ async function scanTyposquatting(targetPath) {
 }
 
 function findTyposquatMatch(name) {
+  const nameLower = name.toLowerCase();
+  
   // Ignore les packages whitelistes
-  if (WHITELIST.includes(name.toLowerCase())) return null;
+  if (WHITELIST.includes(nameLower)) return null;
   
   // Ignore les packages scoped (@org/package)
   if (name.startsWith('@')) return null;
@@ -95,14 +114,17 @@ function findTyposquatMatch(name) {
   // Ignore les packages tres courts (trop de faux positifs)
   if (name.length < MIN_PACKAGE_LENGTH) return null;
 
+  // Ignore les packages avec suffixes legitimes courants
+  if (isLegitimateVariant(nameLower)) return null;
+
   for (const popular of POPULAR_PACKAGES) {
     // Ignore si c'est exactement le meme
-    if (name.toLowerCase() === popular.toLowerCase()) continue;
+    if (nameLower === popular.toLowerCase()) continue;
 
     // Ignore si le package populaire est trop court
     if (popular.length < MIN_PACKAGE_LENGTH) continue;
 
-    const distance = levenshteinDistance(name.toLowerCase(), popular.toLowerCase());
+    const distance = levenshteinDistance(nameLower, popular.toLowerCase());
     
     // Distance de 1 = tres suspect (une seule lettre de difference)
     if (distance === 1) {
@@ -121,25 +143,45 @@ function findTyposquatMatch(name) {
         distance: distance
       };
     }
-
-    // Verifie les tricks de suffixe
-    if (isSuffixTrick(name, popular)) {
-      return {
-        original: popular,
-        type: 'suffix_trick',
-        distance: distance
-      };
-    }
   }
 
   return null;
+}
+
+function isLegitimateVariant(name) {
+  // Suffixes legitimes qui ne sont PAS du typosquatting
+  const legitimateSuffixes = [
+    '-cli', '-core', '-utils', '-plugin', '-loader', '-webpack',
+    '-react', '-vue', '-angular', '-node', '-browser',
+    '-esm', '-cjs', '-umd',
+    '-types', '-typings',
+    '2', '3', '4', '5', // versions majeures (mysql2, etc)
+    '-v2', '-v3', '-next', '-latest', '-stable', '-lts'
+  ];
+  
+  for (const suffix of legitimateSuffixes) {
+    if (name.endsWith(suffix)) return true;
+  }
+  
+  // Prefixes legitimes
+  const legitimatePrefixes = [
+    '@types/', '@babel/', '@jest/', '@testing-library/',
+    'eslint-plugin-', 'eslint-config-',
+    'babel-plugin-', 'babel-preset-',
+    'webpack-plugin-', 'rollup-plugin-', 'vite-plugin-'
+  ];
+  
+  for (const prefix of legitimatePrefixes) {
+    if (name.startsWith(prefix)) return true;
+  }
+  
+  return false;
 }
 
 function detectTyposquatType(typo, original) {
   if (typo.length === original.length - 1) return 'missing_char';
   if (typo.length === original.length + 1) return 'extra_char';
   if (typo.length === original.length) {
-    // Verifie si swap
     let diffs = 0;
     for (let i = 0; i < typo.length; i++) {
       if (typo[i] !== original[i]) diffs++;
@@ -148,25 +190,6 @@ function detectTyposquatType(typo, original) {
     return 'wrong_char';
   }
   return 'unknown';
-}
-
-function isSuffixTrick(name, popular) {
-  const nameLower = name.toLowerCase();
-  const popularLower = popular.toLowerCase();
-  
-  const suffixes = ['-js', '.js', '-node', '-npm', '-cli', '-api', '-lib', '-pkg', '-dev', '-pro'];
-  for (const suffix of suffixes) {
-    if (nameLower === popularLower + suffix) return true;
-    if (nameLower === popularLower.replace('-', '') + suffix) return true;
-  }
-  
-  // Verifie aussi les prefixes
-  const prefixes = ['node-', 'npm-', 'js-', 'get-', 'the-'];
-  for (const prefix of prefixes) {
-    if (nameLower === prefix + popularLower) return true;
-  }
-  
-  return false;
 }
 
 function levenshteinDistance(a, b) {
