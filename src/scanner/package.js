@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { loadCachedIOCs } = require('../ioc/updater.js');
 
 const SUSPICIOUS_SCRIPTS = [
   'preinstall',
@@ -23,13 +24,14 @@ async function scanPackageJson(targetPath) {
   const threats = [];
   const pkgPath = path.join(targetPath, 'package.json');
 
-if (!fs.existsSync(pkgPath)) {
+  if (!fs.existsSync(pkgPath)) {
     return threats;
   }
 
   const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
   const scripts = pkg.scripts || {};
 
+  // Scan lifecycle scripts
   for (const scriptName of SUSPICIOUS_SCRIPTS) {
     if (scripts[scriptName]) {
       const scriptContent = scripts[scriptName];
@@ -51,6 +53,34 @@ if (!fs.existsSync(pkgPath)) {
           });
         }
       }
+    }
+  }
+
+  // Scan declared dependencies against IOCs
+  const iocs = loadCachedIOCs();
+  const allDeps = {
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+    ...pkg.optionalDependencies,
+    ...pkg.peerDependencies
+  };
+
+  for (const [depName, depVersion] of Object.entries(allDeps)) {
+    const malicious = iocs.packages.find(p => {
+      if (p.name !== depName) return false;
+      if (p.version === '*' || p.version === depVersion) return true;
+      // Check if declared version matches malicious version
+      if (depVersion.includes(p.version)) return true;
+      return false;
+    });
+
+    if (malicious) {
+      threats.push({
+        type: 'known_malicious_package',
+        severity: 'CRITICAL',
+        message: `Dependance malveillante declaree: ${depName}@${depVersion} (source: ${malicious.source || 'IOC'})`,
+        file: 'package.json'
+      });
     }
   }
 

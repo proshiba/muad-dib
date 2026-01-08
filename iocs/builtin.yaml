@@ -101,6 +101,9 @@ files:
   # Shai-Hulud v3 (nouveaux noms)
   - bun_installer.js
   - environment_source.js
+  - cl0vd.json
+  - pigS3cr3ts.json
+  - actionsSecrets.json
   # Artefacts exfiltration v3
   - 3nvir0nm3nt.json
   - c9nt3nts.json
