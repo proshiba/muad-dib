@@ -28,7 +28,7 @@ const WHITELIST = [
   'co', 'q', 'n', 'i', 'a', 'v', 'x', 'y', 'z',
   'ejs', 'nyc', 'ini', 'joi', 'vue', 'npm', 'got', 'ora',
   'vary', 'mime', 'send', 'etag', 'raw', 'tar', 'uid', 'cjs',
-  'rxjs', 'yarn', 'pnpm', 'next',
+  'rxjs', 'yarn', 'pnpm', 'next', 'targz',
   
   // Packages legitimes avec noms similaires
   'acorn', 'acorn-walk', 'js-yaml', 'cross-env', 'node-fetch', 'node-gyp',

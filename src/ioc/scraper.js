@@ -485,7 +485,6 @@ async function runScraper() {
 const [
   shaiHuludPackages,
   datadogResult,
-  githubPackages,
   osvPackages,
   socketPackages,
   phylumPackages,
@@ -495,7 +494,6 @@ const [
 ] = await Promise.all([
   scrapeShaiHuludDetector(),
   scrapeDatadogIOCs(),
-  scrapeGitHubAdvisories(),
   scrapeOSV(),
   scrapeSocketReports(),
   scrapePhylum(),
@@ -508,7 +506,6 @@ const [
 const allPackages = [
   ...shaiHuludPackages,
   ...datadogResult.packages,
-  ...githubPackages,
   ...osvPackages,
   ...socketPackages,
   ...phylumPackages,
