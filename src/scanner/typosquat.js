@@ -143,8 +143,8 @@ function findTyposquatMatch(name) {
       };
     }
 
-    // Distance de 2 seulement si le package est assez long (>= 8 chars)
-    if (distance === 2 && popular.length >= 8) {
+    // Distance de 2 seulement si le package est assez long (>= 5 chars)
+    if (distance === 2 && popular.length >= 5) {
       return {
         original: popular,
         type: detectTyposquatType(name, popular),

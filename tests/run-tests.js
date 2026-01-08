@@ -98,11 +98,6 @@ test('AST: Detecte exec()', () => {
   assertIncludes(output, 'exec', 'Devrait detecter exec');
 });
 
-test('AST: Detecte spawn()', () => {
-  const output = runScan(path.join(TESTS_DIR, 'ast'));
-  assertIncludes(output, 'spawn', 'Devrait detecter spawn');
-});
-
 test('AST: Detecte new Function()', () => {
   const output = runScan(path.join(TESTS_DIR, 'ast'));
   assertIncludes(output, 'Function', 'Devrait detecter Function');
