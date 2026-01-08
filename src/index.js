@@ -19,12 +19,15 @@ function scanParanoid(targetPath) {
   const threats = [];
   
   function scanFile(filePath) {
-    try {
-      const content = fs.readFileSync(filePath, 'utf8');
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    
+      // Ignorer les URLs (contiennent souvent des patterns comme .git)
+      const contentWithoutUrls = content.replace(/https?:\/\/[^\s"']+/g, '');
       
       for (const [ruleKey, rule] of Object.entries(PARANOID_RULES)) {
         for (const pattern of rule.patterns) {
-          if (content.includes(pattern)) {
+          if (contentWithoutUrls.includes(pattern)) {
             threats.push({
               type: rule.id,
               severity: rule.severity.toUpperCase(),
@@ -41,7 +44,7 @@ function scanParanoid(targetPath) {
   }
   
   function walkDir(dir) {
-    const excluded = ['node_modules', '.git', 'test', 'tests', 'src', 'vscode-extension'];
+    const excluded = ['node_modules', '.git', 'test', 'tests', 'src', 'vscode-extension', '.muaddib-cache', 'data', 'iocs'];
     try {
       const files = fs.readdirSync(dir);
       for (const file of files) {
