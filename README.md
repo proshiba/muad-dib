@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/npm/v/muaddib-scanner" alt="npm version">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node">
-  <img src="https://img.shields.io/badge/IOCs-180%2B-red" alt="IOCs">
+  <img src="https://img.shields.io/badge/IOCs-930%2B-red" alt="IOCs">
 </p>
 
 <p align="center">
@@ -47,6 +47,7 @@ MUAD'DIB detects AND guides your response.
 | MITRE ATT&CK Mapping | Yes | No | No | No |
 | Discord/Slack Webhooks | Yes | No | No | No |
 | VS Code Extension | Yes | Yes | Yes | No |
+| Paranoid Mode | Yes | No | No | No |
 | Daemon Mode | Yes | No | No | No |
 | 100% Open Source | Yes | No | No | Yes |
 
@@ -63,9 +64,10 @@ npm install -g muaddib-scanner
 ### From source
 
 ```bash
-git clone https://github.com/DNSZLSK/muad-dib.git
+git clone https://github.com/music-muse/muad-dib.git
 cd muad-dib
 npm install
+npm link
 ```
 
 ---
@@ -84,7 +86,7 @@ muaddib scan /path/to/project
 Each scan displays a 0-100 risk score:
 
 ```
-[SCORE] 58/100 [███████████░░░░░░░░░] HIGH
+[SCORE] 58/100 [***********---------] HIGH
 ```
 
 ### Explain mode (full details)
@@ -114,6 +116,14 @@ muaddib scan . --fail-on critical  # Fail only on CRITICAL
 muaddib scan . --fail-on high      # Fail on HIGH and CRITICAL (default)
 muaddib scan . --fail-on medium    # Fail on MEDIUM, HIGH, CRITICAL
 ```
+
+### Paranoid mode
+
+```bash
+muaddib scan . --paranoid
+```
+
+Ultra-strict detection with lower tolerance. Useful for critical projects. Detects any network access, subprocess execution, dynamic code evaluation, and sensitive file access.
 
 ### Discord/Slack webhook
 
@@ -150,7 +160,14 @@ muaddib update
 muaddib scrape
 ```
 
-Fetches latest malicious packages from GitHub Advisories, OSV, and other sources.
+Fetches latest malicious packages from multiple threat intelligence sources:
+- Shai-Hulud 2.0 Detector (GitHub)
+- Datadog Security Labs
+- OSV.dev
+- Socket.dev reports
+- Phylum Research
+- AlienVault OTX
+- Aikido Intel
 
 ---
 
@@ -176,9 +193,9 @@ Detects when code reads credentials AND sends them over the network:
 
 | Campaign | Packages | Status |
 |----------|----------|--------|
-| Shai-Hulud v1 | @ctrl/tinycolor, ng2-file-upload | Detected |
-| Shai-Hulud v2 | @asyncapi/specs, posthog-node, kill-port | Detected |
-| Shai-Hulud v3 | @vietmoney/react-big-calendar | Detected |
+| Shai-Hulud v1 (Sept 2025) | @ctrl/tinycolor, ng2-file-upload | Detected |
+| Shai-Hulud v2 (Nov 2025) | @asyncapi/specs, posthog-node, kill-port | Detected |
+| Shai-Hulud v3 (Dec 2025) | @vietmoney/react-big-calendar | Detected |
 | event-stream (2018) | flatmap-stream, event-stream | Detected |
 | eslint-scope (2018) | eslint-scope | Detected |
 | Protestware | node-ipc, colors, faker | Detected |
@@ -208,7 +225,7 @@ The VS Code extension automatically scans your npm projects.
 Search "MUAD'DIB" in VS Code Extensions, or:
 
 ```bash
-code --install-extension dnszlsk.muaddib-vscode
+ext install music-music.muaddib-security
 ```
 
 ### Commands
@@ -260,10 +277,11 @@ Alerts appear in Security > Code scanning alerts.
 ```
 MUAD'DIB Scanner
 |
-+-- IOC Match (YAML DB)
++-- IOC Match (930+ packages, YAML/JSON DB)
 +-- AST Parse (acorn)
 +-- Pattern Matching (shell, scripts)
 +-- Typosquat Detection (Levenshtein)
++-- Paranoid Mode (ultra-strict)
 |
 v
 Dataflow Analysis (credential read -> network send)
@@ -299,16 +317,18 @@ Edit YAML files in `iocs/`:
 ### Development
 
 ```bash
-git clone https://github.com/DNSZLSK/muad-dib.git
+git clone https://github.com/music-muse/muad-dib.git
 cd muad-dib
 npm install
 npm test
 ```
 
+---
+
 ## Community
 
 - Discord: https://discord.gg/y8zxSmue
-- Issues: https://github.com/DNSZLSK/muad-dib/issues
+- Issues: https://github.com/music-muse/muad-dib/issues
 
 ---
 

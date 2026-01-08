@@ -5,14 +5,14 @@
 <h1 align="center">MUAD'DIB</h1>
 
 <p align="center">
-  <strong>Supply-chain threat detection & response for npm</strong>
+  <strong>Detection et reponse aux menaces supply-chain npm</strong>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/npm/v/muaddib-scanner" alt="npm version">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
   <img src="https://img.shields.io/badge/node-%3E%3D18-brightgreen" alt="Node">
-  <img src="https://img.shields.io/badge/IOCs-180%2B-red" alt="IOCs">
+  <img src="https://img.shields.io/badge/IOCs-930%2B-red" alt="IOCs">
 </p>
 
 <p align="center">
@@ -29,22 +29,23 @@
 
 Les attaques supply chain npm explosent. Shai-Hulud a compromis 25K+ repos en 2025. Les outils existants detectent, mais n'aident pas a repondre.
 
-MUAD'DIB detects AND guides your response.
+MUAD'DIB detecte ET guide votre reponse.
 
 | Feature | MUAD'DIB | Socket | Snyk | Opengrep |
 |---------|----------|--------|------|----------|
-| IOC Detection | Yes | Yes | Yes | No |
-| AST Analysis | Yes | Yes | Yes | Yes |
-| Dataflow Analysis | Yes | No | No | Yes |
-| Typosquatting Detection | Yes | Yes | Yes | No |
-| Response Playbooks | Yes | No | No | No |
-| Risk Score | Yes | Yes | Yes | No |
-| SARIF / GitHub Security | Yes | Yes | Yes | Yes |
-| MITRE ATT&CK Mapping | Yes | No | No | No |
-| Discord/Slack Webhooks | Yes | No | No | No |
-| VS Code Extension | Yes | Yes | Yes | No |
-| Daemon Mode | Yes | No | No | No |
-| 100% Open Source | Yes | No | No | Yes |
+| Detection IOC | Oui | Oui | Oui | Non |
+| Analyse AST | Oui | Oui | Oui | Oui |
+| Analyse Dataflow | Oui | Non | Non | Oui |
+| Detection Typosquatting | Oui | Oui | Oui | Non |
+| Playbooks Reponse | Oui | Non | Non | Non |
+| Score de Risque | Oui | Oui | Oui | Non |
+| SARIF / GitHub Security | Oui | Oui | Oui | Oui |
+| Mapping MITRE ATT&CK | Oui | Non | Non | Non |
+| Webhooks Discord/Slack | Oui | Non | Non | Non |
+| Extension VS Code | Oui | Oui | Oui | Non |
+| Mode Paranoid | Oui | Non | Non | Non |
+| Mode Daemon | Oui | Non | Non | Non |
+| 100% Open Source | Oui | Non | Non | Oui |
 
 ---
 
@@ -57,9 +58,10 @@ npm install -g muaddib-scanner
 
 ### Depuis les sources
 ```bash
-git clone https://github.com/DNSZLSK/muad-dib.git
+git clone https://github.com/music-muse/muad-dib.git
 cd muad-dib
 npm install
+npm link
 ```
 
 ---
@@ -76,7 +78,7 @@ muaddib scan /chemin/vers/projet
 
 Chaque scan affiche un score de risque 0-100 :
 ```
-[SCORE] 58/100 [███████████░░░░░░░░░] HIGH
+[SCORE] 58/100 [***********---------] HIGH
 ```
 
 ### Mode explain (details complets)
@@ -86,7 +88,7 @@ muaddib scan . --explain
 
 Affiche pour chaque detection :
 - Rule ID
-- MITRE ATT&CK technique
+- Technique MITRE ATT&CK
 - References (articles, CVEs)
 - Playbook de reponse
 
@@ -103,6 +105,13 @@ muaddib scan . --fail-on critical  # Fail seulement sur CRITICAL
 muaddib scan . --fail-on high      # Fail sur HIGH et CRITICAL (defaut)
 muaddib scan . --fail-on medium    # Fail sur MEDIUM, HIGH, CRITICAL
 ```
+
+### Mode paranoid
+```bash
+muaddib scan . --paranoid
+```
+
+Detection ultra-stricte avec moins de tolerance. Utile pour les projets critiques. Detecte tout acces reseau, execution de sous-processus, evaluation de code dynamique et acces aux fichiers sensibles.
 
 ### Webhook Discord/Slack
 ```bash
@@ -129,6 +138,20 @@ Surveille automatiquement tous les `npm install` et scanne les nouveaux packages
 muaddib update
 ```
 
+### Scraper de nouveaux IOCs
+```bash
+muaddib scrape
+```
+
+Recupere les derniers packages malveillants depuis plusieurs sources de threat intelligence :
+- Shai-Hulud 2.0 Detector (GitHub)
+- Datadog Security Labs
+- OSV.dev
+- Socket.dev reports
+- Phylum Research
+- AlienVault OTX
+- Aikido Intel
+
 ---
 
 ## Features
@@ -151,9 +174,9 @@ Detecte quand du code lit des credentials ET les envoie sur le reseau :
 
 | Campagne | Packages | Status |
 |----------|----------|--------|
-| Shai-Hulud v1 | @ctrl/tinycolor, ng2-file-upload | Detecte |
-| Shai-Hulud v2 | @asyncapi/specs, posthog-node, kill-port | Detecte |
-| Shai-Hulud v3 | @vietmoney/react-big-calendar | Detecte |
+| Shai-Hulud v1 (Sept 2025) | @ctrl/tinycolor, ng2-file-upload | Detecte |
+| Shai-Hulud v2 (Nov 2025) | @asyncapi/specs, posthog-node, kill-port | Detecte |
+| Shai-Hulud v3 (Dec 2025) | @vietmoney/react-big-calendar | Detecte |
 | event-stream (2018) | flatmap-stream, event-stream | Detecte |
 | eslint-scope (2018) | eslint-scope | Detecte |
 | Protestware | node-ipc, colors, faker | Detecte |
@@ -180,11 +203,11 @@ L'extension VS Code scanne automatiquement vos projets npm.
 
 ### Installation
 
-Le dossier `vscode-extension/` contient l'extension. Pour tester :
+Cherchez "MUAD'DIB" dans les Extensions VS Code, ou :
 
-1. Ouvrir le dossier `vscode-extension` dans VS Code
-2. Appuyer sur F5
-3. Dans la nouvelle fenetre, ouvrir un projet npm
+```bash
+ext install music-music.muaddib-security
+```
 
 ### Commandes
 
@@ -229,23 +252,15 @@ Les alertes apparaissent dans Security > Code scanning alerts.
 
 ---
 
-## Discord
-
-Rejoignez le serveur Discord pour :
-- Recevoir les alertes de scan
-- Partager des IOCs
-- Contribuer au projet
-
----
-
 ## Architecture
 ```
 MUAD'DIB Scanner
 |
-+-- IOC Match (YAML DB)
++-- IOC Match (930+ packages, YAML/JSON DB)
 +-- AST Parse (acorn)
 +-- Pattern Matching (shell, scripts)
 +-- Typosquat Detection (Levenshtein)
++-- Paranoid Mode (ultra-strict)
 |
 v
 Dataflow Analysis (credential read -> network send)
@@ -279,7 +294,7 @@ Editez les fichiers YAML dans `iocs/` :
 
 ### Developper
 ```bash
-git clone https://github.com/DNSZLSK/muad-dib.git
+git clone https://github.com/music-muse/muad-dib.git
 cd muad-dib
 npm install
 npm test
@@ -288,7 +303,7 @@ npm test
 ## Communaute
 
 - Discord: https://discord.gg/y8zxSmue
-- Issues: https://github.com/DNSZLSK/muad-dib/issues
+- Issues: https://github.com/music-muse/muad-dib/issues
 
 ---
 
