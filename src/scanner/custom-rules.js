@@ -353,7 +353,8 @@ function scanCustomRules(targetPath, options, warnings) {
       }
 
       for (const { compiled, message } of rule.patterns) {
-        compiled.lastIndex = 0; // reset for stateful (global) regexes
+        // Reset lastIndex for RegExp objects with the global flag; no-op for others
+        compiled.lastIndex = 0;
         if (compiled.test(content)) {
           threats.push({
             type: rule.typeKey,
