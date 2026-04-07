@@ -2236,6 +2236,7 @@ function getRule(type) {
   if (RULES[type]) return RULES[type];
   if (PARANOID_RULES[type]) return PARANOID_RULES[type];
   if (PARANOID_RULES_BY_ID[type]) return PARANOID_RULES_BY_ID[type];
+  if (CUSTOM_RULES[type]) return CUSTOM_RULES[type];
   return {
     id: 'MUADDIB-UNK-001',
     name: 'Unknown Threat',
@@ -2292,6 +2293,30 @@ for (const [, rule] of Object.entries(PARANOID_RULES)) {
   PARANOID_RULES_BY_ID[rule.id] = rule;
 }
 
+// Custom rules: populated at scan time by custom-rules scanner
+// Key: typeKey (e.g. "custom_detection4canisterworm"), Value: rule object
+const CUSTOM_RULES = Object.create(null);
+
+/**
+ * Register user-defined custom rules so getRule() can look them up.
+ * Called by the custom-rules scanner before threats are processed.
+ * @param {object[]} rules - validated rule objects from loadCustomRulesFromDir
+ */
+function registerCustomRules(rules) {
+  for (const rule of rules) {
+    CUSTOM_RULES[rule.typeKey] = rule;
+  }
+}
+
+/**
+ * Clear all registered custom rules (called by scan-context resetAll between scans).
+ */
+function clearCustomRules() {
+  for (const key of Object.keys(CUSTOM_RULES)) {
+    delete CUSTOM_RULES[key];
+  }
+}
+
 // Validate all rules at load time
 const VALID_SEVERITIES = new Set(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
 const VALID_CONFIDENCES = new Set(['high', 'medium', 'low']);
@@ -2311,4 +2336,4 @@ for (const [key, rule] of Object.entries(PARANOID_RULES)) {
   }
 }
 
-module.exports = { RULES, getRule, PARANOID_RULES };
+module.exports = { RULES, getRule, PARANOID_RULES, registerCustomRules, clearCustomRules };

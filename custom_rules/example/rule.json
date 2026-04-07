@@ -1,0 +1,19 @@
+{
+  "id": "CUSTOM-EXAMPLE-001",
+  "name": "Example Custom Detection",
+  "severity": "HIGH",
+  "confidence": "medium",
+  "description": "Example custom rule — detects a suspicious placeholder pattern. Replace with your own regex patterns.",
+  "references": [
+    "https://attack.mitre.org/techniques/T1059/"
+  ],
+  "mitre": "T1059",
+  "patterns": [
+    {
+      "regex": "__CUSTOM_MALICIOUS_MARKER__",
+      "flags": "i",
+      "message": "Custom marker pattern detected — replace this pattern with your own detection logic"
+    }
+  ],
+  "fileExtensions": [".js", ".ts", ".py", ".sh"]
+}

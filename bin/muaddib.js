@@ -65,6 +65,7 @@ let feedLimit = null;
 let feedSeverity = null;
 let feedSince = null;
 let servePort = null;
+let customRulesDir = null;
 
 for (let i = 0; i < options.length; i++) {
   if (options[i] === '--json') {
@@ -166,6 +167,18 @@ for (let i = 0; i < options.length; i++) {
     i++;
   } else if (options[i] === '--auto-sandbox') {
     autoSandbox = true;
+  } else if (options[i] === '--custom-rules-dir') {
+    const crPath = options[i + 1];
+    if (!crPath || crPath.startsWith('-')) {
+      console.error('[ERROR] --custom-rules-dir requires a directory path argument');
+      process.exit(1);
+    }
+    if (crPath.includes('..')) {
+      console.error('[ERROR] --custom-rules-dir path must not contain path traversal (..)');
+      process.exit(1);
+    }
+    customRulesDir = crPath;
+    i++;
   } else if (options[i] === '--temporal') {
     temporalMode = true;
   } else if (options[i] === '--limit') {
@@ -269,7 +282,8 @@ if (command === 'version' || command === '--version' || command === '-v') {
     noModuleGraph: noModuleGraph,
     noReachability: noReachability,
     configPath: configPath,
-    autoSandbox: autoSandbox
+    autoSandbox: autoSandbox,
+    customRulesDir: customRulesDir
   }).then(exitCode => {
     // Use process.exitCode instead of process.exit() to let pending async work
     // (the non-blocking version update check) complete before the process exits.
