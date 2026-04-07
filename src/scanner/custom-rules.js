@@ -43,6 +43,7 @@ const { getMaxFileSize } = require('../shared/constants.js');
 const { registerCustomRules } = require('../rules/index.js');
 
 const MAX_CUSTOM_RULE_FILE_SIZE = 64 * 1024; // 64 KB
+const MAX_MATCHED_TEXT_LENGTH = 200;
 const MAX_CUSTOM_RULES = 100;
 
 const VALID_SEVERITIES = new Set(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW']);
@@ -358,7 +359,7 @@ function scanCustomRules(targetPath, options, warnings) {
         const match = compiled.exec(content);
         if (match) {
           const line = content.substring(0, match.index).split('\n').length;
-          const matchedText = match[0].slice(0, 200);
+          const matchedText = match[0].slice(0, MAX_MATCHED_TEXT_LENGTH);
           threats.push({
             type: rule.typeKey,
             severity: rule.severity,
