@@ -222,6 +222,9 @@ async function runCustomRulesTests() {
       assert(threats[0].type === 'custom_testrule', `Wrong type: ${threats[0].type}`);
       assert(threats[0].severity === 'HIGH', `Wrong severity: ${threats[0].severity}`);
       assertIncludes(threats[0].message, 'Evil function detected', 'Message should contain pattern message');
+      assert(threats[0].line >= 1, `Expected line >= 1, got ${threats[0].line}`);
+      assert(typeof threats[0].matchedText === 'string', `Expected matchedText to be a string, got ${typeof threats[0].matchedText}`);
+      assertIncludes(threats[0].matchedText, 'evilFunction(', 'matchedText should contain the matched string');
     } finally {
       cleanup(rulesDir, target);
       clearCustomRules();

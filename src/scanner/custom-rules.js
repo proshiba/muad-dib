@@ -355,12 +355,17 @@ function scanCustomRules(targetPath, options, warnings) {
       for (const { compiled, message } of rule.patterns) {
         // Reset lastIndex for RegExp objects with the global flag; no-op for others
         compiled.lastIndex = 0;
-        if (compiled.test(content)) {
+        const match = compiled.exec(content);
+        if (match) {
+          const line = content.substring(0, match.index).split('\n').length;
+          const matchedText = match[0].slice(0, 200);
           threats.push({
             type: rule.typeKey,
             severity: rule.severity,
             message: `[${rule.name}] ${message}`,
-            file: relFile
+            file: relFile,
+            line,
+            matchedText
           });
           break; // one threat per rule per file is sufficient
         }
