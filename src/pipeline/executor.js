@@ -19,6 +19,7 @@ const { Spinner, listInstalledPackages, wasFilesCapped, getOverflowFiles, debugL
 const { getMaxFileSize } = require('../shared/constants.js');
 const { scanParanoid } = require('../scanner/paranoid.js');
 const { runTemporalAnalyses } = require('../temporal-runner.js');
+const { scanCustomRules } = require('../scanner/custom-rules.js');
 
 /**
  * Match detected Python dependencies against PyPI IOCs.
@@ -298,6 +299,10 @@ async function execute(targetPath, options, pythonDeps, warnings) {
     const paranoidThreats = scanParanoid(targetPath);
     threats.push(...paranoidThreats);
   }
+
+  // Custom rules (user-defined detections from custom_rules/<rule-folder>/rule.json)
+  const customThreats = scanCustomRules(targetPath, options, warnings);
+  threats.push(...customThreats);
 
   // Temporal analyses (--temporal, --temporal-ast, --temporal-publish, --temporal-maintainer)
   if (options.temporal || options.temporalAst || options.temporalPublish || options.temporalMaintainer) {
