@@ -1,0 +1,25 @@
+{
+  "id": "MUADDIB-AST-087",
+  "name": "Redis RCE — Webshell Deployment",
+  "severity": "CRITICAL",
+  "confidence": "high",
+  "description": "Redis CONFIG SET dir targeting a web-accessible path (e.g. /var/www, /app/public, /srv/http) or CONFIG SET dbfilename set to a .php filename — exploits Redis file persistence to deploy a PHP webshell for remote command execution. Technique observed in strapi-plugin-cron / strapi-plugin-events supply-chain attack.",
+  "references": [
+    "https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/",
+    "https://attack.mitre.org/techniques/T1505.003/"
+  ],
+  "mitre": "T1505.003",
+  "patterns": [
+    {
+      "regex": "CONFIG\\s+SET\\s+dir\\s+[^\\r\\n]*(?:\\/var\\/www|\\/app\\/public|\\/srv\\/http|\\/usr\\/share\\/nginx|\\/public\\/uploads|\\/static|\\/assets|\\/web\\/|\\/html\\/)",
+      "flags": "im",
+      "message": "Redis RCE: CONFIG SET dir targets a web-accessible path — exploits Redis to write a PHP webshell or other files."
+    },
+    {
+      "regex": "CONFIG\\s+SET\\s+dbfilename\\s+\\S+\\.php",
+      "flags": "im",
+      "message": "Redis RCE: CONFIG SET dbfilename to a .php file — deploys PHP webshell via Redis database persistence."
+    }
+  ],
+  "fileExtensions": [".js", ".mjs", ".cjs", ".ts", ".jsx", ".tsx"]
+}

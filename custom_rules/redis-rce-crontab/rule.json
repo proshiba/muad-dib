@@ -1,0 +1,20 @@
+{
+  "id": "MUADDIB-AST-085",
+  "name": "Redis RCE — Crontab Injection",
+  "severity": "CRITICAL",
+  "confidence": "high",
+  "description": "Redis CONFIG SET dir targeting a cron path (/var/spool/cron, /etc/cron.d, crontabs) — exploits Redis file persistence to write malicious cron entries for scheduled task persistence. Technique observed in strapi-plugin-cron / strapi-plugin-events supply-chain attack.",
+  "references": [
+    "https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/",
+    "https://attack.mitre.org/techniques/T1053.003/"
+  ],
+  "mitre": "T1053.003",
+  "patterns": [
+    {
+      "regex": "CONFIG\\s+SET\\s+dir\\s+[^\\r\\n]*(?:\\/var\\/spool\\/cron|\\/etc\\/cron|\\/crontabs)",
+      "flags": "im",
+      "message": "Redis RCE: CONFIG SET dir targets a cron path — exploits Redis to write cron entries for persistence."
+    }
+  ],
+  "fileExtensions": [".js", ".mjs", ".cjs", ".ts", ".jsx", ".tsx"]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "MUADDIB-SHELL-024",
+  "name": "Raw Disk Read / Block Device Creation",
+  "severity": "CRITICAL",
+  "confidence": "high",
+  "description": "Raw disk read via dd if=/dev/sdX or block device creation via mknod — bypasses filesystem permissions to extract secrets from raw disk blocks. Used in container escape attacks to read host disk data. Technique observed in strapi-plugin-cron / strapi-plugin-events supply-chain attack.",
+  "references": [
+    "https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/",
+    "https://attack.mitre.org/techniques/T1552/",
+    "https://attack.mitre.org/techniques/T1611/"
+  ],
+  "mitre": "T1611",
+  "patterns": [
+    {
+      "regex": "\\bdd\\s+if=\\/dev\\/[sh]d[a-z]\\d*",
+      "flags": "im",
+      "message": "Raw disk read via dd if=/dev/sdX — bypasses filesystem permissions to extract secrets from raw disk blocks."
+    },
+    {
+      "regex": "\\bdd\\s+if=\\/dev\\/nvme\\d",
+      "flags": "im",
+      "message": "Raw disk read via dd if=/dev/nvmeX — bypasses filesystem permissions to extract secrets from raw disk blocks."
+    },
+    {
+      "regex": "\\bmknod\\s+\\S+\\s+b\\s+\\d+\\s+\\d+",
+      "flags": "im",
+      "message": "Block device creation via mknod — creates raw disk access device for host data extraction from container."
+    }
+  ]
+}

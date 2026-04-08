@@ -1,0 +1,25 @@
+{
+  "id": "MUADDIB-AST-088",
+  "name": "PHP Webshell String Literal",
+  "severity": "CRITICAL",
+  "confidence": "high",
+  "description": "PHP webshell code embedded as a string literal — <?php system($_GET[\"c\"]) or similar patterns that execute arbitrary OS commands via HTTP GET/POST parameters. Indicates the package is deploying a webshell for remote command execution. Technique observed in strapi-plugin-cron / strapi-plugin-events supply-chain attack.",
+  "references": [
+    "https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/",
+    "https://attack.mitre.org/techniques/T1505.003/"
+  ],
+  "mitre": "T1505.003",
+  "patterns": [
+    {
+      "regex": "<\\?php\\s+system\\s*\\(",
+      "flags": "im",
+      "message": "PHP webshell code in string literal: system() call — remote command execution via HTTP request."
+    },
+    {
+      "regex": "<\\?php[^>]{0,200}\\$_(?:GET|POST|REQUEST)\\s*\\[",
+      "flags": "im",
+      "message": "PHP webshell code in string literal: user-controlled input ($_GET/$_POST/$_REQUEST) — remote command execution via HTTP request."
+    }
+  ],
+  "fileExtensions": [".js", ".mjs", ".cjs", ".ts", ".jsx", ".tsx"]
+}

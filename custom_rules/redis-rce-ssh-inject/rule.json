@@ -1,0 +1,25 @@
+{
+  "id": "MUADDIB-AST-086",
+  "name": "Redis RCE — SSH Authorized Keys Injection",
+  "severity": "CRITICAL",
+  "confidence": "high",
+  "description": "Redis CONFIG SET dir targeting /root/.ssh or /home/*/.ssh, or CONFIG SET dbfilename authorized_keys — exploits Redis file persistence to inject an SSH public key for persistent backdoor access. Technique observed in strapi-plugin-cron / strapi-plugin-events supply-chain attack.",
+  "references": [
+    "https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/",
+    "https://attack.mitre.org/techniques/T1098.004/"
+  ],
+  "mitre": "T1098.004",
+  "patterns": [
+    {
+      "regex": "CONFIG\\s+SET\\s+dir\\s+[^\\r\\n]*\\/\\.ssh",
+      "flags": "im",
+      "message": "Redis RCE: CONFIG SET dir targets SSH directory — exploits Redis to inject authorized_keys for backdoor access."
+    },
+    {
+      "regex": "CONFIG\\s+SET\\s+dbfilename\\s+authorized_keys",
+      "flags": "im",
+      "message": "Redis RCE: CONFIG SET dbfilename authorized_keys — injects SSH public key via Redis file write."
+    }
+  ],
+  "fileExtensions": [".js", ".mjs", ".cjs", ".ts", ".jsx", ".tsx"]
+}
