@@ -3289,7 +3289,7 @@ run('mknod /tmp/hostdisk b 8 1 2>/dev/null');
     } finally { cleanupTemp(tmp); }
   });
 
-  await asyncTest('AST: Redis rules exist (AST-085 through AST-088, SHELL-024)', async () => {
+  await asyncTest('AST: Redis and raw disk rules exist (AST-085 through AST-088, SHELL-024)', async () => {
     const { getRule } = require('../../src/rules/index.js');
     const r1 = getRule('redis_rce_crontab');
     assert(r1.id === 'MUADDIB-AST-085', `Expected MUADDIB-AST-085, got ${r1.id}`);

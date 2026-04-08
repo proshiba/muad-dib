@@ -37,7 +37,7 @@ const MALICIOUS_PATTERNS = [
   // /proc/mem scanning for runner secret extraction (Trivy credential stealer)
   { pattern: /\/proc\/\S*\/mem\b/m, name: 'proc_mem_scan', severity: 'CRITICAL' },
   // Raw disk read: dd if=/dev/sdX and mknod block device creation (container escape / host secret extraction)
-  { pattern: /\bdd\s+if=\/dev\/[sh]d[a-z]/m, name: 'raw_disk_read', severity: 'CRITICAL' },
+  { pattern: /\bdd\s+if=\/dev\/[sh]d[a-z]\d*/m, name: 'raw_disk_read', severity: 'CRITICAL' },
   { pattern: /\bdd\s+if=\/dev\/nvme\d/m, name: 'raw_disk_read', severity: 'CRITICAL' },
   { pattern: /\bmknod\s+\S+\s+b\s+\d+\s+\d+/m, name: 'raw_disk_read', severity: 'CRITICAL' }
 ];

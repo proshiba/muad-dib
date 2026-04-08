@@ -123,11 +123,11 @@ function handleLiteral(node, ctx) {
           message: 'Redis RCE: CONFIG SET dir targets SSH directory — exploits Redis to inject authorized_keys for backdoor access.',
           file: ctx.relFile
         });
-      } else {
+      } else if (/\/var\/www|\/app\/public|\/srv\/http|\/usr\/share\/nginx|\/public\/uploads|\/static|\/assets|\/web\/|\/html\//i.test(node.value)) {
         ctx.threats.push({
           type: 'redis_rce_webshell',
           severity: 'CRITICAL',
-          message: `Redis RCE: CONFIG SET dir to non-standard path "${node.value.substring(0, 80)}" — exploits Redis to write arbitrary files.`,
+          message: `Redis RCE: CONFIG SET dir targets web-accessible path "${node.value.substring(0, 80)}" — exploits Redis to write PHP webshell or other files.`,
           file: ctx.relFile
         });
       }
@@ -162,7 +162,7 @@ function handleLiteral(node, ctx) {
 
     // Raw disk read: dd if=/dev/sdX or mknod block device creation
     // Used in container escape attacks to read raw disk blocks bypassing filesystem permissions
-    if (/\bdd\s+if=\/dev\/[sh]d[a-z]/i.test(node.value) || /\bdd\s+if=\/dev\/nvme/i.test(node.value)) {
+    if (/\bdd\s+if=\/dev\/[sh]d[a-z]\d*/i.test(node.value) || /\bdd\s+if=\/dev\/nvme\d/i.test(node.value)) {
       ctx.threats.push({
         type: 'raw_disk_read',
         severity: 'CRITICAL',
