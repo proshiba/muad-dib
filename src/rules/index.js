@@ -2194,6 +2194,67 @@ const RULES = {
     references: ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect/apply'],
     mitre: 'T1059'
   },
+  redis_rce_crontab: {
+    id: 'MUADDIB-AST-085',
+    name: 'Redis RCE — Crontab Injection',
+    severity: 'CRITICAL',
+    confidence: 'high',
+    description: 'Commande Redis CONFIG SET dir vers un repertoire cron (/var/spool/cron, /etc/cron.d) — exploitation Redis pour ecrire des entrees cron et etablir une persistance (strapi-plugin-cron pattern).',
+    references: [
+      'https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+      'https://attack.mitre.org/techniques/T1053.003/'
+    ],
+    mitre: 'T1053.003'
+  },
+  redis_rce_ssh_inject: {
+    id: 'MUADDIB-AST-086',
+    name: 'Redis RCE — SSH Authorized Keys Injection',
+    severity: 'CRITICAL',
+    confidence: 'high',
+    description: 'Commande Redis CONFIG SET dir vers /root/.ssh ou CONFIG SET dbfilename authorized_keys — exploitation Redis pour injecter une cle SSH publique et obtenir un acces backdoor persistant.',
+    references: [
+      'https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+      'https://attack.mitre.org/techniques/T1098.004/'
+    ],
+    mitre: 'T1098.004'
+  },
+  redis_rce_webshell: {
+    id: 'MUADDIB-AST-087',
+    name: 'Redis RCE — Webshell Deployment',
+    severity: 'CRITICAL',
+    confidence: 'high',
+    description: 'Commande Redis CONFIG SET dir vers un chemin web accessible ou CONFIG SET dbfilename shell.php — exploitation Redis pour deposer un webshell PHP et obtenir une execution de commandes arbitraires.',
+    references: [
+      'https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+      'https://attack.mitre.org/techniques/T1505.003/'
+    ],
+    mitre: 'T1505.003'
+  },
+  php_webshell_string: {
+    id: 'MUADDIB-AST-088',
+    name: 'PHP Webshell String Literal',
+    severity: 'CRITICAL',
+    confidence: 'high',
+    description: 'Chaine de caracteres contenant du code PHP webshell (<?php system($_GET["c"])) — depôt de webshell pour execution de commandes distantes via requetes HTTP.',
+    references: [
+      'https://attack.mitre.org/techniques/T1505.003/',
+      'https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/'
+    ],
+    mitre: 'T1505.003'
+  },
+  raw_disk_read: {
+    id: 'MUADDIB-SHELL-024',
+    name: 'Raw Disk Read / Block Device Creation',
+    severity: 'CRITICAL',
+    confidence: 'high',
+    description: 'Lecture brute du disque via dd if=/dev/sdX ou creation de peripherique bloc via mknod — contourne les permissions du systeme de fichiers pour extraire des secrets depuis les blocs bruts du disque hôte (technique d\'escalade de privileges en container).',
+    references: [
+      'https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+      'https://attack.mitre.org/techniques/T1552/',
+      'https://attack.mitre.org/techniques/T1611/'
+    ],
+    mitre: 'T1611'
+  },
   lifecycle_missing_script: {
     id: 'MUADDIB-PKG-017',
     name: 'Phantom Lifecycle Script',

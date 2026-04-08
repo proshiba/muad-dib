@@ -838,6 +838,37 @@ const PLAYBOOKS = {
   trusted_new_dependency:
     'HAUTE: Package populaire (TRUSTED) a ajoute une nouvelle dependance connue. ' +
     'Verifier le changelog et la legitimite de l\'ajout. Pas de blocage immediat mais surveillance renforcee.',
+
+  // Redis RCE / strapi-plugin-cron / strapi-plugin-events patterns
+  redis_rce_crontab:
+    'CRITIQUE: Injection crontab via Redis CONFIG SET. Technique strapi-plugin-cron: l\'attaquant envoie ' +
+    'du protocole Redis brut pour ecrire des entrees cron dans /var/spool/cron ou /etc/cron.d. ' +
+    'Verifier crontab -l et /etc/cron.d. Supprimer les entrees suspectes. Rotation des credentials. ' +
+    'Reference: https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+
+  redis_rce_ssh_inject:
+    'CRITIQUE: Injection de cle SSH via Redis CONFIG SET dir /root/.ssh + dbfilename authorized_keys. ' +
+    'L\'attaquant utilise Redis pour ecrire une cle publique SSH et obtenir un acces backdoor permanent. ' +
+    'Verifier ~/.ssh/authorized_keys et /root/.ssh/authorized_keys. Supprimer toute cle inconnue. ' +
+    'Rotation des secrets. Reference: https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+
+  redis_rce_webshell:
+    'CRITIQUE: Deploiement de webshell via Redis CONFIG SET. L\'attaquant configure Redis pour ecrire ' +
+    'un fichier PHP dans un repertoire accessible par le serveur web (ex: /app/public/uploads/shell.php). ' +
+    'Verifier les fichiers PHP recemment crees dans les repertoires publics. Supprimer les webshells. ' +
+    'Reference: https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
+
+  php_webshell_string:
+    'CRITIQUE: Chaine PHP webshell dans le code source (<?php system($_GET["c"])). ' +
+    'Le package tente de deposer un webshell PHP pour l\'execution de commandes distantes. ' +
+    'Verifier les fichiers PHP crees. Scanner les repertoires publics. Supprimer le package immediatement.',
+
+  raw_disk_read:
+    'CRITIQUE: Lecture brute du disque (dd if=/dev/sdX) ou creation de peripherique bloc (mknod b). ' +
+    'Technique d\'escalade de privileges en container: acces brut aux blocs disque du host pour extraire ' +
+    'des secrets (mots de passe, cles privees, mnemoniques). Verifier les peripheriques /dev crees. ' +
+    'Auditer les acces aux blocs disque. Verifier que le container n\'a pas CAP_SYS_ADMIN. ' +
+    'Reference: https://safedep.io/malicious-npm-strapi-plugin-events-c2-agent/',
 };
 
 function getPlaybook(threatType) {
