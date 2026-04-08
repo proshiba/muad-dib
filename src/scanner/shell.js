@@ -35,11 +35,7 @@ const MALICIOUS_PATTERNS = [
   // systemd persistence (pgmon.service, sysmon.service — CanisterWorm/TeamPCP T1543.002)
   { pattern: /systemctl\s+(?:--\S+\s+)*(enable|start|daemon-reload)\b/m, name: 'systemd_persistence', severity: 'CRITICAL' },
   // /proc/mem scanning for runner secret extraction (Trivy credential stealer)
-  { pattern: /\/proc\/\S*\/mem\b/m, name: 'proc_mem_scan', severity: 'CRITICAL' },
-  // Raw disk read: dd if=/dev/sdX and mknod block device creation (container escape / host secret extraction)
-  { pattern: /\bdd\s+if=\/dev\/[sh]d[a-z]\d*/m, name: 'raw_disk_read', severity: 'CRITICAL' },
-  { pattern: /\bdd\s+if=\/dev\/nvme\d/m, name: 'raw_disk_read', severity: 'CRITICAL' },
-  { pattern: /\bmknod\s+\S+\s+b\s+\d+\s+\d+/m, name: 'raw_disk_read', severity: 'CRITICAL' }
+  { pattern: /\/proc\/\S*\/mem\b/m, name: 'proc_mem_scan', severity: 'CRITICAL' }
 ];
 
 const SHEBANG_RE = /^#!.*\b(?:ba)?sh\b/;

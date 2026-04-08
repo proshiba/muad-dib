@@ -393,30 +393,6 @@ async function runShellTests() {
     } finally { cleanupTemp(tmp); }
   });
 
-  await asyncTest('SHELL-024: dd if=/dev/sda → raw_disk_read (shell script)', async () => {
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'muaddib-shell-'));
-    fs.writeFileSync(path.join(tmp, 'package.json'), JSON.stringify({ name: 'test-shell', version: '1.0.0' }));
-    fs.writeFileSync(path.join(tmp, 'steal.sh'), '#!/bin/bash\ndd if=/dev/sda1 bs=4096 count=5000 | strings | grep -iE "PASSWORD="');
-    try {
-      const result = await runScanDirect(tmp);
-      const t = (result.threats || []).find(t => t.type === 'raw_disk_read');
-      assert(t, 'dd if=/dev/sda should be detected as raw_disk_read');
-      assert(t.severity === 'CRITICAL', `Expected CRITICAL, got ${t.severity}`);
-    } finally { cleanupTemp(tmp); }
-  });
-
-  await asyncTest('SHELL-024: mknod block device → raw_disk_read (shell script)', async () => {
-    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'muaddib-shell-'));
-    fs.writeFileSync(path.join(tmp, 'package.json'), JSON.stringify({ name: 'test-shell', version: '1.0.0' }));
-    fs.writeFileSync(path.join(tmp, 'escape.sh'), '#!/bin/bash\nmknod /tmp/hostdisk b 8 1 2>/dev/null');
-    try {
-      const result = await runScanDirect(tmp);
-      const t = (result.threats || []).find(t => t.type === 'raw_disk_read');
-      assert(t, 'mknod block device should be detected as raw_disk_read');
-      assert(t.severity === 'CRITICAL', `Expected CRITICAL, got ${t.severity}`);
-    } finally { cleanupTemp(tmp); }
-  });
-
   await asyncTest('SHELL-020/021/022: rules and playbooks exist', async () => {
     const { getRule } = require('../../src/rules/index.js');
     const { getPlaybook } = require('../../src/response/playbooks.js');
@@ -440,9 +416,6 @@ async function runShellTests() {
     assert(r4.id === 'MUADDIB-AST-060', `Expected MUADDIB-AST-060, got ${r4.id}`);
     const p4 = getPlaybook('npm_token_steal');
     assert(p4.includes('npm') || p4.includes('token'), 'Playbook should reference npm or token');
-
-    const r5 = getRule('raw_disk_read');
-    assert(r5.id === 'MUADDIB-SHELL-024', `Expected MUADDIB-SHELL-024, got ${r5.id}`);
   });
 }
 
